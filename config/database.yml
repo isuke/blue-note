@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: blue_note
+  password: blue_note
+  timeout: 5000
+
+development:
+  <<: *default
+  database: blue_note_development
+
+test:
+  <<: *default
+  database: blue_note_test
