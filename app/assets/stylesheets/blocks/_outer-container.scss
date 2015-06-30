@@ -1,0 +1,4 @@
+.outer-container {
+  @include outer-container;
+  overflow: hidden;
+}

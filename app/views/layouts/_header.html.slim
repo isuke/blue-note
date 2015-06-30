@@ -1,0 +1,10 @@
+header.header
+  .header__left
+    .header__title Blue Note
+  .header__center
+    span.header__title    = yield(:title)
+    span.header__sub_tite = yield(:sub_title)
+  nav.header__right
+    ul
+      li.header__list: a.header__btn href="#" Projects
+      li.header__list: a.header__btn href="#" User Name

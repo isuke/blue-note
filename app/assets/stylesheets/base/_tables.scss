@@ -1,0 +1,31 @@
+table {
+  @include font-feature-settings("kern", "liga", "tnum");
+  border-collapse: collapse;
+  margin: $small-spacing 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+th {
+  border-bottom: 1px solid darken($base-border-color, 15%);
+  font-weight: 600;
+  padding: $small-spacing;
+  text-align: left;
+}
+
+td {
+  border-bottom: $base-border;
+  padding: $small-spacing;
+}
+
+tr,
+td,
+th {
+  vertical-align: middle;
+}
+
+tbody {
+  tr:nth-child(odd)  { background-color: $base-bg-color; }
+  tr:nth-child(even) { background-color: $base-bg-lighten-color; }
+  tr:hover           { background-color: $base-bg-darken-color; }
+}

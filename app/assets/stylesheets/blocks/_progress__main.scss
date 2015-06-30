@@ -1,0 +1,32 @@
+.progress .progress__main {
+  /*** variables **************************************************************/
+  /****************************************************************************/
+
+  .progress__main__graphs {
+    @include fill-parent;
+    @include row(table);
+    background-color: $white-bg-darken-color;
+
+    .progress__main__graphs__feature_graph {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+    .progress__main__graphs__task_graph {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+  }
+
+  .progress__main__lists {
+    @include fill-parent;
+    @include row(table);
+    .progress__main__lists__feature_list {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+    .progress__main__lists__task_list {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+  }
+}

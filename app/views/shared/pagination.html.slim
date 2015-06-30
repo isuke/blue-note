@@ -1,0 +1,24 @@
+/ ruby: editable_page_size (default: false)
+/ vue: pageSize
+/ vue: pageTotal
+/ vue: currentPage
+- editable_page_size ||= false
+
+.pagination
+  ul
+    li.pagination__item: a.pagination__page_first v-on="click : firstPage()" First
+    li.pagination__item: a.pagination__page_prev  v-on="click : prevPage()" Prev
+    tamplete v-repeat = "pageTotal"
+      li.pagination__item v-if="pageTotal < 15 || ( currentPage-5 < $index+1 && $index+1 < currentPage+5 )"
+        a.pagination__item__page_num [
+          v-if ="$index+1 != currentPage"
+          v-on ="click : setCurrentPage($index+1)"
+        ] {{$index+1}}
+        span.pagination__item__page_num--current v-if="$index+1 == currentPage" {{$index+1}}
+      li.pagination__item v-if="pageTotal >= 15 && ( currentPage-5 == $index+1 || $index+1 == currentPage+5 )"
+        span ...
+    li.pagination__item: a.pagination__page_next  v-on="click : nextPage()" Next
+    li.pagination__item: a.pagination__page_last  v-on="click : lastPage()" Last
+    - if editable_page_size
+      li.pagination__item
+        = select_tag :current_page, options_for_select([10, 25, 50, 100]), 'v-model': "pageSize"

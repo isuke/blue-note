@@ -1,0 +1,10 @@
+@import "neat-helpers";
+
+// Neat Overrides
+$column: em(90px);
+$gutter: $small-spacing / 10;
+$grid-columns: 12;
+$max-width: 100%;
+
+$tablet: new-breakpoint(max-width 768px 8);
+$mobile: new-breakpoint(max-width 480px 4);

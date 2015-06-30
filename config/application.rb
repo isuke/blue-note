@@ -17,6 +17,9 @@ Bundler.require(*Rails.groups)
 
 module BlueNote
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -32,8 +35,10 @@ module BlueNote
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.generators do |g|
-      g.factory_girl suffix: 'factory'
-    end
+    config.generators { |g| g.factory_girl suffix: 'factory' }
+
+    config.annotations.register_extensions('scss')   { |annotation| %r{//\s*(#{annotation}):?\s*(.*?)$} }
+    config.annotations.register_extensions('slim')   { |annotation| %r{/\s*(#{annotation}):?\s*(.*?)$} }
+    config.annotations.register_extensions('coffee') { |annotation| %r(#\s*(#{annotation}):?\s*(.*?)$) }
   end
 end
