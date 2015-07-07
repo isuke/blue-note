@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+  - '2.2.2'
+addons:
+  postgresql: '9.4'
+install: bundle install --deployment --without development --without production
+cache:
+  directories: vendor/bundle
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+  - 'sh -e /etc/init.d/xvfb start'
+script:
+  - bundle exec teaspoon
+  - bundle exec rspec spec
+env:
+  global:
+    - RAILS_ENV=test
+    - DISPLAY=":99.0"
