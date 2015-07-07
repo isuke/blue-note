@@ -1,0 +1,20 @@
+.pagination {
+  /*** variables **************************************************************/
+  $pagenation-ft-color:        $white-ft-color;
+  $pagenation-ft-action-color: $white-ft-accent-color;
+  /****************************************************************************/
+
+  .pagination__item {
+    @include margin(null $small-spacing/2);
+    @include padding(null $small-spacing/2);
+    display: inline;
+
+    .pagination__item__page_num {
+      color: $pagenation-ft-action-color;
+    }
+    .pagination__item__page_num--current {
+      @extend .pagination__item__page_num;
+      color: $pagenation-ft-color;
+    }
+  }
+}

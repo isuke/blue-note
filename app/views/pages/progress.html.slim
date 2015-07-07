@@ -1,0 +1,8 @@
+- provide(:title    , 'Progress')
+- provide(:sub_title, @project.name)
+
+#progress.progress
+  = hidden_field_tag :project_id, params[:project_id], 'v-model': 'projectId'
+
+  == render partial: 'pages/progress__sidemenu'
+  == render partial: 'pages/progress__main'

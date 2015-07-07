@@ -1,0 +1,11 @@
+.feature_list {
+  /*** variables **************************************************************/
+  $feature_list__query-fg-color: $white-ft-color;
+  /****************************************************************************/
+
+  .feature_list__query { color: $feature_list__query-fg-color }
+
+  .feature_list__item--title  { width: 75%; }
+  .feature_list__item--point  { width: 10%; }
+  .feature_list__item--status { width: 15%; }
+}

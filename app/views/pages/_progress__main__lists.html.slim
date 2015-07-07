@@ -1,0 +1,13 @@
+.progress__main__lists
+  component [
+    is              = "featureList"
+    v-transition    = "fade-"
+    transition-mode = "out-in"
+    project-id      = "{{projectId}}"
+    query           = "{{query}}"
+    keep-alive      = true]
+  script type='text/x-template' id='feature_list'
+    == render partial: 'pages/progress__main__lists__feature_list'
+
+  .progress__main__lists__task_list
+    span TODO tasks

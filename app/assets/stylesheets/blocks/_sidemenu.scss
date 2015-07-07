@@ -1,0 +1,28 @@
+.sidemenu {
+
+  /*** variables **************************************************************/
+  $sidemenu-bg-color:        $black-bg-lighten-color;
+  $sidemenu-bg-active-color: $black-bg-color;
+  $sidemenu-ft-color:        $black-ft-lighten-color;
+  $sidemenu-ft-active-color: $black-ft-color;
+  $sidemenu-ft-accent-color: $black-ft-accent-color;
+  /****************************************************************************/
+
+  background-color: $sidemenu-bg-color;
+  color: $sidemenu-ft-accent-color;
+
+  .sidemenu__list__item {
+    @include pad($base-spacing);
+    @include centering(horizontal);
+    cursor: pointer;
+    @include transition(all .2s ease-out);
+
+    &:hover { background-color: $sidemenu-bg-active-color; }
+  }
+  .sidemenu__list__item--active {
+    @extend .sidemenu__list__item;
+    background-color: $sidemenu-bg-active-color;
+    color: $sidemenu-ft-active-color;
+    cursor: default;
+  }
+}

@@ -1,0 +1,13 @@
+/*
+ * centering
+ */
+
+@mixin centering($type: vertical) {
+  @if $type == vertical or $type == both {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  @if $type == horizontal or $type == both {
+    text-align: center;
+  }
+}

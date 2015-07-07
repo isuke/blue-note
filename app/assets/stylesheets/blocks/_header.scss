@@ -1,0 +1,63 @@
+.header {
+  /*** variables **************************************************************/
+  $header-height: 50px;
+  $header-bg-color:            $theme-bg-color;
+  $header-bg-accent-color:     $theme-bg-darken-color;
+  $header-ft-color:            $theme-ft-color;
+  $header-ft-non-accent-color: $theme-ft-non-accent-color;
+  /****************************************************************************/
+
+  @include fill-parent;
+  @include row;
+  position: relative;
+  min-height: $header-height;
+
+  background-color: $header-bg-color;
+
+  color: $header-ft-color;
+
+  > * {
+    line-height: $header-height;
+    height: $header-height;
+  }
+
+  .header__left {
+    @include span-columns(2);
+    @include centering(both);
+
+    background-color: $header-bg-accent-color;
+  }
+
+  .header__center {
+    @include span-columns(7);
+    @include padding(null $small-spacing null $small-spacing);
+    @include centering(vertical);
+  }
+
+  .header__right {
+    @include span-columns(3);
+    @include centering(vertical);
+    > * { float: right; }
+  }
+
+  .header__title {
+    font-size: $large-font-size;
+  }
+
+  .header__sub_tite {
+    margin-left: 1rem;
+    font-size: $base-font-size;
+  }
+
+  .header__list {
+    float:left;
+    @include padding(null $small-spacing null $small-spacing);
+    @include transition(all .2s ease-out);
+    &:hover { background-color: $header-bg-accent-color; }
+  }
+
+  .header__btn {
+    display: block;
+    color: $header-ft-color;
+  }
+}

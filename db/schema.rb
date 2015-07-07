@@ -26,7 +26,9 @@ ActiveRecord::Schema.define(version: 20150617174858) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "features", ["priority"], name: "index_features_on_priority", using: :btree
+  add_index "features", ["project_id", "point"], name: "index_features_on_project_id_and_point", using: :btree
+  add_index "features", ["project_id", "priority"], name: "index_features_on_project_id_and_priority", using: :btree
+  add_index "features", ["project_id", "status"], name: "index_features_on_project_id_and_status", using: :btree
   add_index "features", ["project_id"], name: "index_features_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
