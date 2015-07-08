@@ -14,6 +14,7 @@ before_script:
 script:
   - bundle exec teaspoon
   - bundle exec rspec spec
+  - bundle exec rubocop --format simple
 env:
   global:
     - RAILS_ENV=test

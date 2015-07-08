@@ -4,11 +4,12 @@ RSpec.feature 'Progress Page', js: true do
   given!(:project) { create(:project) }
   given!(:features) do
     [:todo, :doing, :done].product((0..3).to_a).map do |(status, point)|
-      create(:feature,
+      create(
+        :feature,
         project: project,
         title:   "project_#{status}_#{point}",
         status:  status,
-        point:   point
+        point:   point,
       )
     end
   end

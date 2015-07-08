@@ -25,7 +25,7 @@ class Feature < ActiveRecord::Base
 
   belongs_to :project
 
-  enumerize :status, in: {todo: 10, doing: 20, done: 30}, default: :todo
+  enumerize :status, in: { todo: 10, doing: 20, done: 30 }, default: :todo
 
   validates :project , presence: true
   validates :title   , presence: true
