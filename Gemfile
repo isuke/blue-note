@@ -30,6 +30,7 @@ group :development do
   gem 'pry-doc'
   gem 'hirb-unicode'
   gem 'rails-erd'
+  gem 'annotate', '~> 2.6.6'
   gem 'bitters'
 end
 

@@ -1,3 +1,25 @@
+# == Schema Information
+# Schema version: 20150617174858
+#
+# Table name: features
+#
+#  id         :integer          not null, primary key
+#  project_id :integer          not null
+#  title      :string           not null
+#  status     :integer          not null
+#  priority   :integer
+#  point      :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_features_on_project_id               (project_id)
+#  index_features_on_project_id_and_point     (project_id,point)
+#  index_features_on_project_id_and_priority  (project_id,priority)
+#  index_features_on_project_id_and_status    (project_id,status)
+#
+
 class Feature < ActiveRecord::Base
   extend Enumerize
 
