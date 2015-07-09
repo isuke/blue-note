@@ -4,8 +4,10 @@ Rails.application.routes.draw do
     get 'progress', to: 'pages#progress'
   end
 
-  resources :projects, only: [], defaults: { format: :json }, shallow: true do
-    resources :features, only: [:index]
+  namespace :api, format: :json do
+    resources :projects, only: [], shallow: true do
+      resources :features, only: [:index, :create]
+    end
   end
 
 end

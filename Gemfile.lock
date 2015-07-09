@@ -154,7 +154,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.2)
       sprockets-rails
+    rails-assets-jquery (2.1.4)
     rails-assets-page (1.6.3)
+    rails-assets-toastr (2.1.1)
+      rails-assets-jquery (>= 1.6.3)
     rails-assets-underscore (1.8.3)
     rails-assets-vue (0.12.1)
     rails-deprecated_sanitizer (1.0.3)
@@ -177,8 +180,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
-    responders (2.1.0)
-      railties (>= 4.2.0, < 5)
     rspec-core (3.3.0)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.0)
@@ -285,10 +286,10 @@ DEPENDENCIES
   pry-rails
   rails (= 4.2.2)
   rails-assets-page!
+  rails-assets-toastr!
   rails-assets-underscore!
   rails-assets-vue!
   rails-erd
-  responders
   rspec-its
   rspec-rails
   rubocop

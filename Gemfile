@@ -8,7 +8,6 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'pg'
-gem 'responders'
 gem 'slim'
 gem 'enumerize'
 gem 'bourbon'
@@ -18,6 +17,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
   gem 'rails-assets-vue'
   gem 'rails-assets-page'
+  gem 'rails-assets-toastr'
 end
 
 group :development do

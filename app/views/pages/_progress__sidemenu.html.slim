@@ -1,5 +1,15 @@
 .progress__sidemenu.sidemenu
   ul.sidemenu__list
-    li.sidemenu__list__item--active Progress
+    li.sidemenu__list__item--active
+      | Progress
+      ul.sidemenu__list
+        li
+          component [
+            is              = "featureNew"
+            project-id      = "{{projectId}}"
+            keep-alive      = true
+          ]
+          script type='text/x-template' id='feature_new'
+            == render partial: 'shared/feature_new'
     li.sidemenu__list__item         Users
     li.sidemenu__list__item         Settings
