@@ -17,6 +17,4 @@ private
   def set_feature
     @feature = Feature.find(params[:id])
   end
-
-
 end

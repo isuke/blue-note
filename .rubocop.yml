@@ -1,0 +1,35 @@
+inherit_from:
+  - .rubocop_todo.yml
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'Rakefile'
+    - 'vendor/**/*'
+  RunRailsCops: true
+  DisplayCopNames: true
+Style/StringLiterals:
+  Enabled: false
+Metrics/LineLength:
+  Max: 160
+Style/AccessModifierIndentation:
+  EnforcedStyle: outdent
+Style/AlignParameters:
+  EnforcedStyle:
+    - with_first_parameter
+    - with_fixed_indentation
+Style/Documentation:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+# for the following case.
+#   validates :project , presence: true
+#   validates :title   , presence: true
+#   validates :status  , presence: true
+Style/SpaceBeforeComma:
+  Enabled: false
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
+Style/ExtraSpacing:
+  Enabled: false

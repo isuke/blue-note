@@ -20,7 +20,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-page'
 end
 
-
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
@@ -31,6 +30,7 @@ group :development do
   gem 'hirb-unicode'
   gem 'rails-erd'
   gem 'annotate', '~> 2.6.6'
+  gem 'rubocop', require: false
   gem 'bitters'
 end
 

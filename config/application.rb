@@ -39,6 +39,6 @@ module BlueNote
 
     config.annotations.register_extensions('scss')   { |annotation| %r{//\s*(#{annotation}):?\s*(.*?)$} }
     config.annotations.register_extensions('slim')   { |annotation| %r{/\s*(#{annotation}):?\s*(.*?)$} }
-    config.annotations.register_extensions('coffee') { |annotation| %r(#\s*(#{annotation}):?\s*(.*?)$) }
+    config.annotations.register_extensions('coffee') { |annotation|   /#\s*(#{annotation}):?\s*(.*?)$/ }
   end
 end

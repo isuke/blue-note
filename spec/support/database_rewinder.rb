@@ -6,7 +6,7 @@ RSpec.configure do |config|
     DatabaseRewinder.strategy = :transaction
   end
   config.before :each, js: true do
-    DatabaseRewinder.strategy = :truncation, {pre_count: true}
+    DatabaseRewinder.strategy = :truncation, { pre_count: true }
   end
   config.before :each do
     DatabaseRewinder.start
