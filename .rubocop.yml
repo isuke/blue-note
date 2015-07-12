@@ -9,10 +9,12 @@ AllCops:
     - 'vendor/**/*'
   RunRailsCops: true
   DisplayCopNames: true
-Style/StringLiterals:
-  Enabled: false
 Metrics/LineLength:
   Max: 160
+Metrics/MethodLength:
+  Max: 20
+Style/StringLiterals:
+  Enabled: false
 Style/AccessModifierIndentation:
   EnforcedStyle: outdent
 Style/AlignParameters:
@@ -29,7 +31,16 @@ Style/EmptyLinesAroundBlockBody:
 #   validates :status  , presence: true
 Style/SpaceBeforeComma:
   Enabled: false
+# for the following case.
+#   expect(json['title']).to    eq 'implement hoge'
+#   expect(json['status']).to   eq 'todo'
+#   expect(json['priority']).to eq 1
+#   expect(json['point']).to    eq 1
+Style/SingleSpaceBeforeFirstArg:
+ Enabled: false
 Style/TrailingComma:
   EnforcedStyleForMultiline: comma
 Style/ExtraSpacing:
+  Enabled: false
+Style/ClassAndModuleChildren:
   Enabled: false

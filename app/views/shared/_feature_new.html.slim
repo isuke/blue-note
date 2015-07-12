@@ -1,0 +1,6 @@
+#feature_new.feature_new
+  = form_tag api_project_features_path
+    h6 New Feature
+    = text_field_tag   :title, nil, 'v-model': 'feature.title' , id: 'new_feature_title' , class: 'feature_new__title' , placeholder: 'title'
+    = number_field_tag :point, nil, 'v-model': 'feature.point' , id: 'new_feature_point' , class: 'feature_new__point' , placeholder: 'point', step: 1, min: 0
+    = submit_tag 'Create new feature', 'v-on': 'click : submit', id: 'new_feature_submit', class: 'feature_new__submit'

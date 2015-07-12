@@ -40,7 +40,12 @@ $dark-gray:   #333;
 $medium-gray: #999;
 $light-gray:  #ddd;
 $white:       #f8f8f8;
-$theme-color: #66c4d9;
+$light-blue:  #66c4d9;
+$theme-color:   $light-blue;
+$info-color:    $light-blue;
+$success-color: #64c99b;
+$warning-color: #f6d580;
+$error-color:   #d04255;
 
 //// Blue
 $theme-bg-color:            $theme-color;
