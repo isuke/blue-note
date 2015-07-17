@@ -1,9 +1,9 @@
 .progress__main__lists
   component [
     is              = "featureList"
+    v-ref           = "featureList"
     v-transition    = "fade-"
     transition-mode = "out-in"
-    project-id      = "{{projectId}}"
     keep-alive      = true
   ]
   script type='text/x-template' id='feature_list'

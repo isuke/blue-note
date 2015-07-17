@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require 'websocket_rails/spec_helpers'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
