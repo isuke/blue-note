@@ -7,11 +7,20 @@ class Api::FeaturesController < ApplicationController
     render json: @features, status: :ok
   end
 
+  def show
+    render json: @feature, status: :ok
+  end
+
   def create
     @feature = @project.features.build(feature_param)
     if @feature.save
-      render json: { message: I18n.t('action.create.success', model: I18n.t('activerecord.models.feature')) },
-             status: :created
+      render(
+        json: {
+          id: @feature.id,
+          message: I18n.t('action.create.success', model: I18n.t('activerecord.models.feature')),
+        },
+        status: :created,
+      )
     else
       render(
         json: {

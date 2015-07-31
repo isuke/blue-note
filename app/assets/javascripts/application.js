@@ -4,6 +4,7 @@
 //= require vue
 //= require page
 //= require toastr
+//= require websocket_rails/main
 
 //= require core
 //= require_tree .

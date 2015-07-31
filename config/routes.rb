@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api, format: :json do
     resources :projects, only: [], shallow: true do
-      resources :features, only: [:index, :create]
+      resources :features, only: [:index, :show, :create]
     end
   end
 

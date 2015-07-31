@@ -18,6 +18,24 @@ RSpec.describe 'features request' do
     end
   end
 
+  describe 'GET /api/features/:id' do
+    let!(:feature) { create(:feature, project: project) }
+    let(:path) { "/api/features/#{feature.id}" }
+
+    it 'return a feature' do
+      get path
+
+      expect(response).to be_success
+      expect(response.status).to eq 200
+      expect(json['id']).to         eq feature.id
+      expect(json['project_id']).to eq feature.project_id
+      expect(json['title']).to      eq feature.title
+      expect(json['status']).to     eq feature.status
+      expect(json['priority']).to   eq feature.priority
+      expect(json['point']).to      eq feature.point
+    end
+  end
+
   describe 'POST /api/projects/:project_id/features' do
     let(:path) { "/api/projects/#{project.id}/features" }
 
@@ -36,6 +54,7 @@ RSpec.describe 'features request' do
         expect(response).to be_success
         expect(response.status).to eq 201
 
+        expect(json['id']).not_to eq nil
         expect(json['message']).to eq 'feature was successfully created.'
       end
     end
