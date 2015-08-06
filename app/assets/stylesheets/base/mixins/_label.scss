@@ -1,0 +1,18 @@
+@mixin label($bg-color: $white, $ft-color: darken($bg-color, 60%), $font-size: $small-font-size) {
+  display: inline-block;
+  padding: 0.4em 1.2em;
+  background-color: $bg-color;
+  color: $ft-color;
+  font-size: $font-size;
+  border-radius: $font-size * 0.4;
+  line-height: 1;
+}
+
+.label          { @include label($white-bg-darken-color, $white-ft-color); }
+.label--info    { @include label($info-color   , $white); }
+.label--success { @include label($success-color, $white); }
+.label--warning { @include label($warning-color, $white); }
+.label--error   { @include label($error-color  , $white); }
+.label--todo    { @include label($todo-color   , $white); }
+.label--doing   { @include label($doing-color  , $white); }
+.label--done    { @include label($done-color   , $white); }

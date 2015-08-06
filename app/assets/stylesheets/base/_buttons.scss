@@ -18,6 +18,8 @@ button {
   vertical-align: middle;
   white-space: nowrap;
 
+  @include transition(all .2s ease-out);
+
   &:hover,
   &:focus {
     background-color: darken($action-color, 20%);

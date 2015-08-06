@@ -21,9 +21,9 @@ RSpec.feature 'Progress Page', js: true do
     expect(page).to have_content 'Progress'
     expect(page).to have_content project.name
 
-    expect(page).to have_content 'Feature List'
+    expect(page).to have_css '#feature_list', visible: false
 
-    expect(page).to have_content 'New Feature'
+    expect(page).to have_css '#feature_new' , visible: false
   end
 
   feature 'featuer list' do
