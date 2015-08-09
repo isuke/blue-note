@@ -1,0 +1,15 @@
+.outer_container {
+  @include outer-container;
+  overflow: hidden;
+
+  .outer_container__left {
+    @include span-columns(2 of 12);
+    @include media($tablet) { display: none; }
+  }
+
+  .outer_container__right {
+    @include span-columns(10 of 12);
+    @include media($tablet) { @include span-columns(10 of 10); }
+  }
+
+}

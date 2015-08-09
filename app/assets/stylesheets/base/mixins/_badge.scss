@@ -1,0 +1,18 @@
+@mixin badge($bg-color: $white, $ft-color: darken($bg-color, 60%), $font-size: $small-font-size) {
+  display: inline-block;
+  padding: 0.4em 1.2em;
+  background-color: $bg-color;
+  color: $ft-color;
+  font-size: $font-size;
+  border-radius: $font-size * 5;
+  line-height: 1;
+}
+
+.badge          { @include badge($white-bg-darken-color, $white-ft-color); }
+.badge--info    { @include badge($info-color   , $white); }
+.badge--success { @include badge($success-color, $white); }
+.badge--warning { @include badge($warning-color, $white); }
+.badge--error   { @include badge($error-color  , $white); }
+.badge--todo    { @include badge($todo-color   , $white); }
+.badge--doing   { @include badge($doing-color  , $white); }
+.badge--done    { @include badge($done-color   , $white); }

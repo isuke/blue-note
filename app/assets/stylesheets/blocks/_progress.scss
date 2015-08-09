@@ -1,20 +1,51 @@
 .progress {
   /*** variables **************************************************************/
   $progress-bg-color:        $white-bg-color;
+  $progress-bg-accent-color: $white-bg-darken-color;
   /****************************************************************************/
 
-  @include fill-parent;
-  @include row;
   background-color: $progress-bg-color;
 
-  .progress__sidemenu {
-    @include span-columns(2);
-    padding-bottom: 32768px;
-    margin-bottom: -32768px;
+  .progress__graphs {
+    @include fill-parent;
+    @include row(table);
+
+    .progress__graphs__feature {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+    .progress__graphs__task {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
   }
 
-  .progress__main {
-    @include span-columns(10);
+  .progress__new {
+    @include fill-parent;
+    @include row(table);
+    background-color: $progress-bg-accent-color;
+    .progress__new__feature {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+    .progress__new__task {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+  }
+
+
+  .progress__lists {
+    @include fill-parent;
+    @include row(table);
+    .progress__lists__feature {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
+    .progress__lists__task {
+      @include span-columns(5 of 10);
+      @include pad($small-spacing);
+    }
   }
 
 }

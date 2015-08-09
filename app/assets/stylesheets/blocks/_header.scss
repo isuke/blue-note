@@ -22,21 +22,24 @@
   }
 
   .header__left {
-    @include span-columns(2);
+    @include span-columns(2 of 12);
     @include centering(both);
 
     background-color: $header-bg-accent-color;
+    @include media($tablet){ display: none; }
   }
 
   .header__center {
-    @include span-columns(7);
+    @include span-columns(7 of 12);
     @include padding(null $small-spacing null $small-spacing);
     @include centering(vertical);
+    @include media($tablet) { @include span-columns(7 of 10); }
   }
 
   .header__right {
-    @include span-columns(3);
+    @include span-columns(3 of 12);
     @include centering(vertical);
+    @include media($tablet) { @include span-columns(3 of 10); }
     > * { float: right; }
   }
 

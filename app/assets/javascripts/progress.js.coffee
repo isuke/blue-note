@@ -23,6 +23,11 @@ $ ->
     methods:
       addFeature: (feature)->
         @featureList.push(feature)
+      toggle: (feature)->
+        if feature.selected?
+          feature.selected = !feature.selected
+        else
+          feature.$add('selected', true)
 
   Vue.component 'featureNew',
     template: '#feature_new'

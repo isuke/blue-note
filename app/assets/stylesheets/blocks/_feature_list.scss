@@ -5,7 +5,27 @@
 
   .feature_list__query { color: $feature_list__query-fg-color }
 
-  .feature_list__item--title  { width: 75%; }
-  .feature_list__item--point  { width: 10%; }
-  .feature_list__item--status { width: 15%; }
+  .feature_list__item {
+    @include row;
+    @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+    border-bottom: $base-border;
+
+    @include transition(all .2s ease-out);
+    &:hover { background-color: $white-bg-darken-color; }
+
+    .feature_list__item__left {
+      @include span-columns(1 of 10);
+    }
+    .feature_list__item__right {
+      @include span-columns(9 of 10);
+      @include padding(null null null $small-spacing);
+    }
+  }
+  .feature_list__item:nth-child(1) { border-top: $base-border; }
+  .feature_list__item--selected {
+    @extend .feature_list__item;
+    background-color: $theme-bg-color;
+    color: $theme-ft-color;
+    &:hover { background-color: $theme-bg-darken-color; }
+  }
 }

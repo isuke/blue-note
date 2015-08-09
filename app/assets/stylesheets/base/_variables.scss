@@ -41,16 +41,27 @@ $medium-gray: #999;
 $light-gray:  #ddd;
 $white:       #f8f8f8;
 $light-blue:  #66c4d9;
-$theme-color:   $light-blue;
+$green:       #64c99b;
+$yellow:      #f6d580;
+$red:         #d04255;
+
+$theme-color: $light-blue;
+$theme-darken-color:  darken($theme-color, 20%);
+$theme-lighen-color: lighten($theme-color, 20%);
+
 $info-color:    $light-blue;
-$success-color: #64c99b;
-$warning-color: #f6d580;
-$error-color:   #d04255;
+$success-color: $green;
+$warning-color: $yellow;
+$error-color:   $red;
+
+$todo-color:    $theme-darken-color;
+$doing-color:   $theme-color;
+$done-color:    $theme-lighen-color;
 
 //// Blue
 $theme-bg-color:            $theme-color;
-$theme-bg-darken-color:     darken($theme-bg-color, 20%);
-$theme-bg-lighten-color:   lighten($theme-bg-color, 20%);
+$theme-bg-darken-color:     $theme-darken-color;
+$theme-bg-lighten-color:    $theme-lighen-color;
 $theme-ft-color:            $white;
 $theme-ft-non-accent-color: darken($theme-bg-color , 40%);
 
@@ -67,17 +78,15 @@ $white-bg-darken-color:     darken($white-bg-color,  5%);
 $white-bg-lighten-color:   lighten($white-bg-color,  2%);
 $white-ft-color:            darken($white-bg-color,  40%);
 $white-ft-accent-color:     $theme-color;
-$white-ft-non-accent-color: darken($white-bg-color,  20%);
+$white-ft-non-accent-color: darken($white-bg-color,  10%);
 
 //// Base
 $base-bg-color:             $white-bg-color;
 $base-bg-darken-color:      $white-bg-darken-color;
 $base-bg-lighten-color:     $white-bg-lighten-color;
 
-
 $base-font-color: $white-ft-color;
 $action-color: $white-ft-accent-color;
-
 
 // Border
 $base-border-color: $light-gray;

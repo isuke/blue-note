@@ -6,11 +6,14 @@ html
     = javascript_include_tag 'application'
     = csrf_meta_tags
   body
-    .outer-container
 
-      == render partial: 'layouts/header'
+    == render partial: 'layouts/header'
 
-      == yield
+    .outer_container
+      .outer_container__left
+        == render partial: 'shared/sidemenu'
 
-    .footer
-      = debug(params) if Rails.env.development?
+      .outer_container__right
+        == yield
+
+    == render partial: 'layouts/footer'

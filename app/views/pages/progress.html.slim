@@ -1,8 +1,12 @@
 - provide(:title    , 'Progress')
 - provide(:sub_title, @project.name)
 
+- content_for :sidemenu_progress do
+  | Progress
+
 #progress.progress
   = hidden_field_tag :project_id, params[:project_id], 'v-model': 'projectId'
 
-  == render partial: 'pages/progress__sidemenu'
-  == render partial: 'pages/progress__main'
+  == render partial: 'pages/progress__graphs'
+  == render partial: 'pages/progress__new'
+  == render partial: 'pages/progress__lists'
