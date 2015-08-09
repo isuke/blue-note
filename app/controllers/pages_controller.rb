@@ -1,5 +1,9 @@
 class PagesController < ApplicationController
-  before_action :set_project
+  before_action :set_project, only: [:progress]
+
+  def home
+    render layout: 'simple'
+  end
 
   def progress
   end

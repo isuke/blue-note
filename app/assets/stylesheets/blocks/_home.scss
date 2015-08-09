@@ -1,0 +1,21 @@
+.home {
+  /*** variables **************************************************************/
+  $home-large-spacing:   $large-spacing * 1.5;
+  $home-bg-color:        $white-bg-color;
+  /****************************************************************************/
+
+  @include padding($home-large-spacing null $home-large-spacing null);
+  text-align: center;
+
+  background-color: $home-bg-color;
+
+  .home__title {
+    margin: 0;
+    font-size: $extra-large-font-size * 2;
+    color: $theme-color;
+  }
+  .home__sign_up {
+    margin-top: $large-spacing;
+    font-size: $large-font-size;
+  }
+}

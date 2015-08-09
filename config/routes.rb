@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  root 'pages#home'
+
+  get 'home', to: 'pages#home'
   scope path: '/projects/:project_id' do
     get 'progress', to: 'pages#progress'
   end
