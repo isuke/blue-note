@@ -7,4 +7,6 @@
 //= require websocket_rails/main
 
 //= require core
-//= require_tree .
+//= require_directory .
+//= require_tree ./mixins
+//= require_tree ./components

@@ -1,0 +1,8 @@
+script type='text/x-template' id='sign_up_modal'
+  .sign_up_modal.modal
+    .modal__outer [
+      v-style = "active ? 'opacity: 1;visibility: visible;' : 'opacity: 0;visibility: hidden;'"
+      v-on    = "click: hide"
+    ]
+      .modal__outer__inner v-on="click: $event.stopPropagation()"
+        h1 hello
