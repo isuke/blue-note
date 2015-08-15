@@ -1,10 +1,27 @@
-header.header
-  .header__left
-    .header__title Blue Note
-  .header__center
-    span.header__title    = yield(:title)
-    span.header__sub_tite = yield(:sub_title)
-  nav.header__right
-    ul
-      li.header__list: a.header__btn href="#" Projects
-      li.header__list: a.header__btn href="#" User Name
+= javascript_include_tag 'view_models/header'
+
+#header
+  header.header
+    .header__left
+      .header__title Blue Note
+    .header__center
+      span.header__title    = yield(:title)
+      span.header__sub_tite = yield(:sub_title)
+    nav.header__right
+      ul
+        - if logged_in?
+          li.header__list: a.header__btn href="#" Projects
+          li.header__list: a.header__btn href="#" = @current_user.name
+          li.header__list
+            = link_to 'Logout', '#', 'v-on': 'click: logout', class: 'header__btn'
+        - else
+          li.header__list
+            = link_to 'Login', '#', 'v-on': 'click: showLoginModal', class: 'header__btn'
+
+  component [
+    is         = "loginModal"
+    v-ref      = "loginModal"
+    keep-alive = true
+  ]
+
+== render 'shared/login_modal'

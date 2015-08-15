@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe PagesController do
 
+  let!(:user)   { create(:user, name: 'Alice', email: 'alice@example.com', password: 'foobar') }
+
   subject { response }
 
   describe 'GET #home' do
@@ -12,6 +14,7 @@ RSpec.describe PagesController do
 
   describe 'GET #progress' do
     let(:project) { create(:project, :with_features) }
+    before { login(user) }
     before { get :progress, project_id: project.id }
 
     it { is_expected.to render_template :progress }

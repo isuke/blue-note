@@ -3,12 +3,21 @@ namespace :db do
     desc "Fill database with sample data"
     task populate: :environment do
       ActiveRecord::Base.transaction do
+        populate_users
         populate_projects
         populate_features
       end
     end
 
   private
+
+    def populate_users(num = 30)
+      puts "populate users"
+      User.destroy_all
+      num.times do |n|
+        FactoryGirl.create(:user, email: "user#{n}@example.com", password: 'foobar')
+      end
+    end
 
     def populate_projects(num = 3)
       puts "populate projects"

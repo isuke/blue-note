@@ -9,7 +9,7 @@
     padding-top: 10em;
     background-color: rgba(#000, 0.85);
     text-align: left;
-    z-index: 99999999999;
+    z-index: 100;
 
     .modal__outer__inner {
       @include transition(opacity 0.25s ease);

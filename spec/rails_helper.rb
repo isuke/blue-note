@@ -18,8 +18,9 @@ Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  config.include Requests::JsonHelpers, type: :request
-  config.include Features::WaitForAjax, type: :feature
+  config.include SessionHelper
+  config.include RequestHelper, type: :request
+  config.include FeatureHelper, type: :feature
 
   config.use_transactional_fixtures = false
 

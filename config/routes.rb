@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   end
 
   namespace :api, format: :json do
+    resources :users   , only: [:create]
     resources :projects, only: [], shallow: true do
       resources :features, only: [:index, :show, :create]
     end
+    match '/sign_up', to: 'users#create'         , via: :post
+    match '/login'  , to: 'user_sessions#create' , via: :post
+    match '/logout' , to: 'user_sessions#destroy', via: :DELETE
   end
 
 end
