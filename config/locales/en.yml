@@ -215,9 +215,15 @@ en:
       fail: '%{model} could not be destroyed.'
   activerecord:
     models:
+      user: user
       project: project
       feature: feature
     attributes:
+      user:
+        name: name
+        email: email
+        password: password
+        password_confirmation: password confirmation
       project:
         name: name
       feature:

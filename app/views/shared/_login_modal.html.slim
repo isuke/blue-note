@@ -1,0 +1,13 @@
+script type='text/x-template' id='login_modal'
+  .login_modal.modal
+    .modal__outer [
+      v-style = "active ? 'opacity: 1;visibility: visible;' : 'opacity: 0;visibility: hidden;'"
+      v-on    = "click: hide"
+    ]
+      .modal__outer__inner v-on="click: $event.stopPropagation()"
+        = form_tag do
+          = label_tag :email
+          = email_field_tag :email, nil, 'v-model': 'user_session.email'
+          = label_tag :password
+          = password_field_tag :password, nil, 'v-model': 'user_session.password'
+          = submit_tag 'Login', 'v-on': 'click : submit', id: 'login_modal_submit'

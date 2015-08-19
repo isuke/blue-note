@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Progress Page', js: true do
+  given!(:user)    { create(:user, name: 'Alice', email: 'alice@example.com', password: 'foobar') }
   given!(:project) { create(:project) }
   given!(:features) do
     [:todo, :doing, :done].product((0..3).to_a).map do |(status, point)|
@@ -13,6 +14,7 @@ RSpec.feature 'Progress Page', js: true do
       )
     end
   end
+  background { login user, with_capybara: true }
   background { visit progress_path(project) }
 
   subject { page }

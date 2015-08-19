@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
 
+  root 'pages#home'
+
+  get 'home', to: 'pages#home'
   scope path: '/projects/:project_id' do
     get 'progress', to: 'pages#progress'
   end
 
   namespace :api, format: :json do
+    resources :users   , only: [:create]
     resources :projects, only: [], shallow: true do
       resources :features, only: [:index, :show, :create]
     end
+    match '/sign_up', to: 'users#create'         , via: :post
+    match '/login'  , to: 'user_sessions#create' , via: :post
+    match '/logout' , to: 'user_sessions#destroy', via: :DELETE
   end
 
 end

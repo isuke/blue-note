@@ -1,0 +1,17 @@
+script type='text/x-template' id='feature_list'
+  .feature_list
+    input.feature_list__query [name='feature_list_queue_str' type='text' v-model='queryStr' lazy]
+
+    ul
+      li [
+        v-repeat = "filteredFeatureList"
+        id       = "feature_{{id}}"
+        class    = "{{selected ? 'feature_list__item--selected' : 'feature_list__item'}}"
+        v-on     = "click: toggle(this)"
+        track-by = "id"
+      ]
+        .feature_list__item__left
+          div.feature_list__item__status      v-text="status" class="{{'label--'+status}}"
+          div.feature_list__item__point.badge v-text="point == null ? '-' : point"
+        .feature_list__item__right
+          div.feature_list__item__title v-text="title"

@@ -1,5 +1,10 @@
 class PagesController < ApplicationController
-  before_action :set_project
+  skip_before_action :require_login, only: [:home]
+  before_action      :set_project  , only: [:progress]
+
+  def home
+    render layout: 'simple'
+  end
 
   def progress
   end

@@ -1,0 +1,27 @@
+.modal {
+  /*** variables **************************************************************/
+  $modal-bg-color: $white;
+  /****************************************************************************/
+
+  .modal__outer {
+    @include transition(opacity 0.25s ease);
+    @include position(fixed, 0);
+    padding-top: 10em;
+    background-color: rgba(#000, 0.85);
+    text-align: left;
+    z-index: 100;
+
+    .modal__outer__inner {
+      @include transition(opacity 0.25s ease);
+      background-color: $modal-bg-color;
+      border-radius: $base-border-radius;
+      margin-top: 0;
+      margin: auto;
+      max-height: 95%;
+      overflow: auto;
+      padding: $large-spacing / 2;
+      position: relative;
+      width: 50%;
+    }
+  }
+}

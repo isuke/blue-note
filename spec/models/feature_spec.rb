@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Feature do
-  let(:feature) { build_stubbed(:feature) }
+  let(:feature) { build(:feature) }
   subject { feature }
 
   it { is_expected.to respond_to(:project) }

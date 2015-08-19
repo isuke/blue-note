@@ -5,7 +5,6 @@ $column: em(90px);
 $gutter: $small-spacing / 10;
 $grid-columns: 12;
 $max-width: 100%;
-$visual-grid-color: $error-color;
 
 $tablet: new-breakpoint(max-width 1024px 10);
 $mobile: new-breakpoint(max-width 480px 4);
