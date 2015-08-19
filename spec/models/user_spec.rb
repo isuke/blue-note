@@ -13,6 +13,12 @@ RSpec.describe User do
   it { is_expected.to respond_to(:current_login_at) }
   it { is_expected.to respond_to(:last_login_at) }
 
+  it { is_expected.to respond_to(:join) }
+  it { is_expected.to respond_to(:join!) }
+
+  it { is_expected.to have_many(:members) }
+  it { is_expected.to have_many(:projects) }
+
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_most(50) }
 

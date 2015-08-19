@@ -24,5 +24,17 @@
 class User < ActiveRecord::Base
   acts_as_authentic
 
+  has_many :members
+  has_many :projects, through: :members
+
   validates :name, presence: true, length: { maximum: 50 }
+
+  def join(project, role: :general)
+    self.members.build(project: project, role: role).save
+  end
+
+  def join!(project, role: :general)
+    self.members.build(project: project, role: role).save!
+  end
+
 end
