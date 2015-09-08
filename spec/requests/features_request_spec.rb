@@ -80,7 +80,5 @@ RSpec.describe 'features request' do
         expect(json['message']).to eq 'feature could not be created.'
       end
     end
-
   end
-
 end

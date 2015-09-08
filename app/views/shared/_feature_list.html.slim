@@ -11,7 +11,7 @@ script type='text/x-template' id='feature_list'
         track-by = "id"
       ]
         .feature_list__item__left
-          div.feature_list__item__status      v-text="status" class="{{'label--'+status}}"
-          div.feature_list__item__point.badge v-text="point == null ? '-' : point"
+          .feature_list__item__status      v-text="status" class="{{'label--'+status}}"
+          .feature_list__item__point.badge v-text="point == null ? '-' : point"
         .feature_list__item__right
-          div.feature_list__item__title v-text="title"
+          .feature_list__item__title v-text="title"

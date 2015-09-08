@@ -7,6 +7,8 @@ RSpec.describe Project do
   it { is_expected.to respond_to(:features) }
   it { is_expected.to respond_to(:name) }
 
+  it { is_expected.to respond_to(:member_of) }
+
   it { is_expected.to have_many(:members) }
   it { is_expected.to have_many(:users) }
   it { is_expected.to have_many(:features) }

@@ -21,7 +21,7 @@ $ ->
                 password: @user_session.password
           .done (response) =>
             toastr.success('', response.message, { timeOut: 0 })
-            document.location = '/'
+            document.location = '/dashboard'
           .fail (response) =>
             json = response.responseJSON
             toastr.error('', json.message, { timeOut: 0 })

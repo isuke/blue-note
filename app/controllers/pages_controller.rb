@@ -6,6 +6,9 @@ class PagesController < ApplicationController
     render layout: 'simple'
   end
 
+  def dashboard
+  end
+
   def progress
   end
 

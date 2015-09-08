@@ -1,16 +1,17 @@
 .sidemenu
   ul.sidemenu__list
+    - if yield(:sidemenu_dashboard).empty?
+      li.sidemenu__list__item
+        a href="/dashboard" Dashboard
+    - else
+      li.sidemenu__list__item--active
+        == yield :sidemenu_dashboard
+
     - if yield(:sidemenu_progress).empty?
       li.sidemenu__list__item         Progress
     - else
       li.sidemenu__list__item--active
         == yield :sidemenu_progress
-
-    - if yield(:sidemenu_users).empty?
-      li.sidemenu__list__item         Users
-    - else
-      li.sidemenu__list__item--active
-        == yield :sidemenu_users
 
     - if yield(:sidemenu_settings).empty?
       li.sidemenu__list__item         Settings
