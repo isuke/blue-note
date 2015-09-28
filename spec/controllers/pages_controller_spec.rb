@@ -12,6 +12,13 @@ RSpec.describe PagesController do
     it { is_expected.to render_template :home }
   end
 
+  describe 'GET #dashboard' do
+    before { login(user) }
+    before { get :dashboard }
+
+    it { is_expected.to render_template :dashboard }
+  end
+
   describe 'GET #progress' do
     let(:project) { create(:project, :with_features) }
     before { login(user) }

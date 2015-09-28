@@ -5,13 +5,14 @@ namespace :db do
       ActiveRecord::Base.transaction do
         populate_users
         populate_projects
+        populate_members
         populate_features
       end
     end
 
   private
 
-    def populate_users(num = 30)
+    def populate_users(num = 5)
       puts "populate users"
       User.destroy_all
       num.times do |n|
@@ -19,10 +20,24 @@ namespace :db do
       end
     end
 
-    def populate_projects(num = 3)
+    def populate_projects(num = 10)
       puts "populate projects"
       Project.destroy_all
       FactoryGirl.create_list(:project, num)
+    end
+
+    def populate_members(num = 3)
+      puts "populate members"
+      Member.destroy_all
+      Project.all.each do |project|
+        User.all.sample(num).each.with_index do |user, index|
+          if index.zero?
+            user.join!(project, role: :admin)
+          else
+            user.join!(project, role: :general)
+          end
+        end
+      end
     end
 
     def populate_features(num = 30)

@@ -1,0 +1,11 @@
+= javascript_include_tag 'view_models/dashboard'
+
+- provide(:title, 'Dashboard')
+
+- content_for :sidemenu_dashboard do
+  | Dashboard
+
+#dashboard.dashboard
+  = hidden_field_tag :current_user_id, @current_user.id, 'v-model': 'currentUserId'
+
+  == render partial: 'pages/dashboard__projects'
