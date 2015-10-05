@@ -81,4 +81,50 @@ RSpec.describe 'features request' do
       end
     end
   end
+
+  describe 'POST /api/features/:id' do
+    let(:feature) { create(:feature, project: project, title: 'implement hoge', priority: '1', point: '1') }
+    let(:path) { "/api/features/#{feature.id}" }
+
+    context 'with correct parameter' do
+      let(:params) { { feature: { title: 'upgrade hoge', priority: '2', point: '2', status: 'todo' } } }
+
+      it 'return success code and message' do
+        patch path, params
+
+        expect(response).to be_success
+        expect(response.status).to eq 201
+
+        expect(json['id']).to eq feature.id
+        expect(json['message']).to eq 'feature was successfully updated.'
+
+        feature.reload
+
+        expect(feature.title).to    eq 'upgrade hoge'
+        expect(feature.priority).to eq 2
+        expect(feature.point).to    eq 2
+        expect(feature.status).to   eq 'todo'
+      end
+    end
+
+    context 'with uncorrect parameter' do
+      let(:params) { { feature: { title: 'upgrade hoge', priority: '0', point: '2', status: 'todo' } } }
+
+      it 'return 422 Unprocessable Entity code and message' do
+        patch path, params
+
+        expect(response).not_to be_success
+        expect(response.status).to eq 422
+
+        expect(json['message']).to eq 'feature could not be updated.'
+
+        feature.reload
+
+        expect(feature.title).not_to    eq 'upgrade hoge'
+        expect(feature.priority).not_to eq 0
+        expect(feature.point).not_to    eq 2
+        expect(feature.status).not_to   eq 'todo'
+      end
+    end
+  end
 end

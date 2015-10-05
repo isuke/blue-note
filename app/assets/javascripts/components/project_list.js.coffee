@@ -9,7 +9,7 @@ $ ->
         .done (response) =>
           @projectList = response
         .fail (response) =>
-          console.log response
+          console.error response
     methods:
       linkTo: (project) ->
         projectId = project.$el.id.match(/project_(\d+)/)[1]

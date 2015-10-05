@@ -50,6 +50,102 @@ RSpec.feature 'Progress Page', js: true do
         end
       end
     end
+
+    scenario 'show feature show view when click feature title' do
+      feature = features.first
+
+      find("#feature_#{feature.id}").find('.feature_list__item__title').click
+
+      wait_for_ajax
+      sleep 0.5
+
+      expect(page).to have_button 'Back'
+      expect(page).to have_button 'Edit'
+    end
+  end
+
+  feature 'show featuer' do
+    let(:feature) { features.first }
+    background do
+      fill_in :feature_list_queue_str, with: ''
+      find("#feature_#{feature.id}").find('.feature_list__item__title').click
+
+      wait_for_ajax
+      sleep 0.5
+    end
+
+    scenario 'show' do
+      expect(find('.feature_show__view__item--title')).to      have_content feature.title
+      expect(find('.feature_show__view__item--point')).to      have_content feature.point
+      expect(find('.feature_show__view__item--status')).to     have_content feature.status
+      expect(find('.feature_show__view__item--updated-at')).to have_content feature.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
+      expect(page).to have_button 'Back'
+      expect(page).to have_button 'Edit'
+    end
+
+    scenario 'back to feature list when click back button' do
+      click_button 'Back'
+
+      sleep 0.5
+
+      project.features.each do |feature|
+        expect(page).to have_content feature.title
+      end
+    end
+
+    scenario 'show feature eidt when click edit button' do
+      click_button 'Edit'
+
+      sleep 0.5
+
+      expect(find('.feature_show').find_field('title').value).to  eq feature.title
+      expect(find('.feature_show').find_field('point').value).to  eq feature.point.to_s
+      expect(find('.feature_show').find_field('status').value).to eq feature.status
+    end
+
+    context 'after click edit button' do
+      background do
+        click_button 'Edit'
+
+        sleep 0.5
+      end
+
+      scenario 'back to featuere show when to cancel button' do
+        find('.feature_show').fill_in :title , with: 'edited title'
+        find('.feature_show').fill_in :point , with: '1'
+        find('.feature_show').select 'Done', from:  :status
+        click_button 'Cancel'
+
+        sleep 0.5
+
+        expect(find('.feature_show__view__item--title')).to      have_content feature.title
+        expect(find('.feature_show__view__item--point')).to      have_content feature.point
+        expect(find('.feature_show__view__item--status')).to     have_content feature.status
+        expect(find('.feature_show__view__item--title')).not_to  have_content 'edited title'
+        expect(find('.feature_show__view__item--point')).not_to  have_content '1'
+        expect(find('.feature_show__view__item--status')).not_to have_content 'done'
+        expect(page).to have_button 'Back'
+        expect(page).to have_button 'Edit'
+      end
+
+      scenario 'update the featuere when to update button' do
+        find('.feature_show').fill_in :title , with: 'edited title'
+        find('.feature_show').fill_in :point , with: '1'
+        find('.feature_show').select 'Done', from:  :status
+        click_button 'Update feature'
+
+        sleep 0.5
+
+        expect(find('.feature_show__view__item--title')).to      have_content 'edited title'
+        expect(find('.feature_show__view__item--point')).to      have_content '1'
+        expect(find('.feature_show__view__item--status')).to     have_content 'done'
+        expect(find('.feature_show__view__item--title')).not_to  have_content feature.title
+        expect(find('.feature_show__view__item--point')).not_to  have_content feature.point
+        expect(find('.feature_show__view__item--status')).not_to have_content feature.status
+        expect(page).to have_button 'Back'
+        expect(page).to have_button 'Edit'
+      end
+    end
   end
 
   feature 'new featuer' do

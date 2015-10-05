@@ -1,0 +1,42 @@
+.feature_show {
+  /*** variables **************************************************************/
+  /****************************************************************************/
+
+  .feature_show__view {
+    .feature_show__view__buttons {
+      @include row();
+
+      .feature_show__button--back {
+        @include span-columns(1 of 4);
+        @margin-right: $small-spacing / 2;
+      }
+
+      .feature_show__button--edit {
+        @include span-columns(1 of 4);
+        @margin-left: $small-spacing / 2;
+      }
+    }
+  }
+
+  .feature_show__edit {
+    .feature_show__edit__buttons {
+      @include row();
+
+      .feature_show__button--back{
+        @include span-columns(1 of 4);
+        @margin-right: $small-spacing / 2;
+      }
+
+      .feature_show__button--cancel {
+        @include span-columns(1 of 4);
+        @margin-left:  $small-spacing / 2;
+        @margin-right: $small-spacing / 2;
+      }
+
+      .feature_show__button--submit {
+        @include span-columns(2 of 4);
+        @margin-left:  $small-spacing / 2;
+      }
+    }
+  }
+}
