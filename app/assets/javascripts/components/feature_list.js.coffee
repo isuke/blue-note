@@ -16,15 +16,18 @@ $ ->
           @featureList = response
           @filteredFeatureList = response
         .fail (response) =>
-          console.log response
+          console.error response
     computed:
       filteredFeatureList: ->
         @filter @featureList
     methods:
-      addFeature: (feature)->
+      addFeature: (feature) ->
         @featureList.push(feature)
-      toggle: (feature)->
+      toggle: (feature) ->
         if feature.selected?
           feature.selected = !feature.selected
         else
           feature.$add('selected', true)
+      show: (feature) ->
+        featureId = feature.$el.id.match(/feature_(\d+)/)[1]
+        page "featureShow/#{featureId}"

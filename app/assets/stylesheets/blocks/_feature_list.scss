@@ -20,6 +20,13 @@
       @include span-columns(9 of 10);
       @include padding(null null null $small-spacing);
     }
+
+    .feature_list__item__title {
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
   }
   .feature_list__item:nth-child(1) { border-top: $base-border; }
   .feature_list__item--selected {
