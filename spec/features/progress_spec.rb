@@ -64,7 +64,7 @@ RSpec.feature 'Progress Page', js: true do
     end
   end
 
-  feature 'show featuer' do
+  feature 'featuer show' do
     let(:feature) { features.first }
     background do
       fill_in :feature_list_queue_str, with: ''

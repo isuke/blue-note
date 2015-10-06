@@ -2,21 +2,24 @@ $ ->
   window.progress = new Vue
     el: '#progress'
     data:
+      userId: undefined
       projectId: undefined
       dispatcher: undefined
       channel: undefined
-      listsFeatureView: 'featureList'
+      division2View: 'featureNew'
+      division3View: 'featureList'
     compiled: ->
       @dispatcher = new WebSocketRails('localhost:3000/websocket')
       @channel = @dispatcher.subscribe("project_#{@projectId}")
-      @channel.bind 'features.got', (feature) =>
-        @$.listsFeatureView.addFeature(feature)
+
+      @channel.bind 'features.got', (data) =>
+        @$.division3View.addOrUpdateFeature(data) if @$.division3View.addOrUpdateFeature
 
   page hashbang: true, dispatch: false
-  page 'featureList', (ctx) ->
-    progress.listsFeatureView = 'featureList'
+  page 'featureNew', (ctx) ->
+    progress.division2View = 'featureNew'
   page 'featureShow/:id', (ctx) ->
-    progress.listsFeatureView = 'featureShow'
+    progress.division2View = 'featureShow'
     Vue.nextTick ->
-      progress.$.listsFeatureView.editMode = false
-      progress.$.listsFeatureView.featureId = ctx.params.id
+      progress.$.division2View.editMode = false
+      progress.$.division2View.featureId = ctx.params.id

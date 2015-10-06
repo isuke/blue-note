@@ -15,7 +15,7 @@ $ ->
         @editMode = !@editMode
       back: (e) ->
         e.preventDefault()
-        page 'featureList'
+        page 'featureNew'
       submit: (e)->
         try
           e.preventDefault()
@@ -31,9 +31,9 @@ $ ->
                 status: @featureEdit.status
           .done (response) =>
             toastr.success('', response.message)
-            # @dispatcher.trigger('features.get', {project_id: @projectId, id: response.id})
             @getFeature(response.id)
             @editMode = false
+            @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, id: response.id})
           .fail (response) =>
             json = response.responseJSON
             toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })

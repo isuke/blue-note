@@ -83,11 +83,11 @@ RSpec.describe 'features request' do
   end
 
   describe 'POST /api/features/:id' do
-    let(:feature) { create(:feature, project: project, title: 'implement hoge', priority: '1', point: '1') }
+    let(:feature) { create(:feature, project: project, title: 'implement hoge', priority: '1', point: '1', status: 'todo') }
     let(:path) { "/api/features/#{feature.id}" }
 
     context 'with correct parameter' do
-      let(:params) { { feature: { title: 'upgrade hoge', priority: '2', point: '2', status: 'todo' } } }
+      let(:params) { { feature: { title: 'upgrade hoge', priority: '2', point: '2', status: 'doing' } } }
 
       it 'return success code and message' do
         patch path, params
@@ -103,12 +103,12 @@ RSpec.describe 'features request' do
         expect(feature.title).to    eq 'upgrade hoge'
         expect(feature.priority).to eq 2
         expect(feature.point).to    eq 2
-        expect(feature.status).to   eq 'todo'
+        expect(feature.status).to   eq 'doing'
       end
     end
 
     context 'with uncorrect parameter' do
-      let(:params) { { feature: { title: 'upgrade hoge', priority: '0', point: '2', status: 'todo' } } }
+      let(:params) { { feature: { title: 'upgrade hoge', priority: '0', point: '2', status: 'doing' } } }
 
       it 'return 422 Unprocessable Entity code and message' do
         patch path, params
@@ -123,7 +123,7 @@ RSpec.describe 'features request' do
         expect(feature.title).not_to    eq 'upgrade hoge'
         expect(feature.priority).not_to eq 0
         expect(feature.point).not_to    eq 2
-        expect(feature.status).not_to   eq 'todo'
+        expect(feature.status).not_to   eq 'doing'
       end
     end
   end
