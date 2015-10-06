@@ -21,8 +21,20 @@ $ ->
       filteredFeatureList: ->
         @filter @featureList
     methods:
-      addFeature: (feature) ->
-        @featureList.push(feature)
+      addOrUpdateFeature: (data) ->
+        if _.findKey @featureList, {id: data.feature.id}
+          @updateFeature data
+        else
+          @addFeature data
+      addFeature: (data) ->
+        if data.user.id.toString() != @userId
+          toastr.info('', "#{data.user.name}: created #{data.feature.title}")
+        @featureList.push(data.feature)
+      updateFeature: (data) ->
+        if data.user.id.toString() != @userId
+          toastr.info('', "#{data.user.name}: updated #{data.feature.title}")
+        index = _.findIndex @featureList, {id: data.feature.id}
+        @featureList.$set index, data.feature
       toggle: (feature) ->
         if feature.selected?
           feature.selected = !feature.selected

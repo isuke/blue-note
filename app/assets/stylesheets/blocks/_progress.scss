@@ -6,43 +6,43 @@
 
   background-color: $progress-bg-color;
 
-  .progress__graphs {
+  .progress__division1 {
     @include fill-parent;
     @include row(table);
 
-    .progress__graphs__feature {
+    .progress__division1__feature_graph {
       @include span-columns(5 of 10);
       @include pad($small-spacing);
     }
-    .progress__graphs__task {
+    .progress__division1__task_graph {
       @include span-columns(5 of 10);
       @include pad($small-spacing);
     }
   }
 
-  .progress__new {
+  .progress__division2 {
     @include fill-parent;
     @include row(table);
     background-color: $progress-bg-accent-color;
-    .progress__new__feature {
+    .progress__division2__feature_new {
       @include span-columns(5 of 10);
       @include pad($small-spacing);
     }
-    .progress__new__task {
+    .progress__division2__task_new {
       @include span-columns(5 of 10);
       @include pad($small-spacing);
     }
   }
 
 
-  .progress__lists {
+  .progress__division3 {
     @include fill-parent;
     @include row(table);
-    .progress__lists__feature {
+    .progress__division3__feature_list {
       @include span-columns(5 of 10);
       @include pad($small-spacing);
     }
-    .progress__lists__task {
+    .progress__division3__task_list {
       @include span-columns(5 of 10);
       @include pad($small-spacing);
     }
