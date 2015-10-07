@@ -19,6 +19,7 @@ script:
   - bundle exec teaspoon
   - bundle exec rspec spec --order rand
   - bundle exec rubocop --format simple
+  - bundle exec slim-lint app/views/
 env:
   global:
     - RAILS_ENV=test

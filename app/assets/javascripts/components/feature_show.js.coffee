@@ -4,7 +4,7 @@ $ ->
     inherit: true
     data: ->
       featureId: undefined
-      feature: undefined
+      feature: { title: "", point: "", status: "", updated_at: "" }
       featureEdit: undefined
       editMode: false
     watch:

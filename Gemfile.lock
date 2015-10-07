@@ -248,6 +248,10 @@ GEM
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
+    slim_lint (0.6.1)
+      rubocop (>= 0.25.0)
+      slim (~> 3.0)
+      sysexits (~> 1.1)
     slop (3.6.0)
     spring (1.3.6)
     spring-commands-rspec (1.0.4)
@@ -258,6 +262,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sysexits (1.2.0)
     teaspoon (1.0.2)
       railties (>= 3.2.5, < 5)
     teaspoon-jasmine (2.2.0)
@@ -334,6 +339,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   shoulda
   slim
+  slim_lint
   spring
   spring-commands-rspec
   teaspoon-jasmine
@@ -342,4 +348,4 @@ DEPENDENCIES
   websocket-rails
 
 BUNDLED WITH
-   1.10.4
+   1.10.6

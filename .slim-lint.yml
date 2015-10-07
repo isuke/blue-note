@@ -1,0 +1,5 @@
+AllCops:
+  DisplayCopNames: true
+linters:
+  LineLength:
+    max: 160
