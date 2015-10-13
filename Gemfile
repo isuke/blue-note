@@ -32,7 +32,8 @@ group :development do
   gem 'hirb-unicode'
   gem 'rails-erd'
   gem 'annotate', '~> 2.6.6'
-  gem 'rubocop', require: false
+  gem 'rubocop'  , require: false
+  gem 'slim_lint', require: false
   gem 'bitters'
 end
 

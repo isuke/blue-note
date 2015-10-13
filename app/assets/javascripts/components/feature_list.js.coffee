@@ -28,11 +28,11 @@ $ ->
           @addFeature data
       addFeature: (data) ->
         if data.user.id.toString() != @userId
-          toastr.info('', "#{data.user.name}: created #{data.feature.title}")
+          toastr.info('', "#{data.user.name}: created #{data.feature.title}", { timeOut: 0 })
         @featureList.push(data.feature)
       updateFeature: (data) ->
         if data.user.id.toString() != @userId
-          toastr.info('', "#{data.user.name}: updated #{data.feature.title}")
+          toastr.info('', "#{data.user.name}: updated #{data.feature.title}", { timeOut: 0 })
         index = _.findIndex @featureList, {id: data.feature.id}
         @featureList.$set index, data.feature
       toggle: (feature) ->

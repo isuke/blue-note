@@ -43,7 +43,6 @@ RSpec.feature 'Home Page', js: true do
     expect(page).not_to have_css '.toast-error'
     expect(find('.header')).to have_content 'Dashboard'
     expect(find('.header')).to have_content 'Alice'
-    expect(find('.header')).to have_content 'Logout'
   end
 
   scenario 'logout' do
@@ -51,7 +50,7 @@ RSpec.feature 'Home Page', js: true do
     visit home_path
 
     expect(find('.header')).to have_content 'Alice'
-
+    find('span', text: 'Alice').click
     click_on 'Logout'
 
     wait_for_ajax

@@ -30,14 +30,14 @@
   }
 
   .header__center {
-    @include span-columns(7 of 12);
+    @include span-columns(6 of 12);
     @include padding(null $small-spacing null $small-spacing);
     @include centering(vertical);
     @include media($tablet) { @include span-columns(7 of 10); }
   }
 
   .header__right {
-    @include span-columns(3 of 12);
+    @include span-columns(4 of 12);
     @include centering(vertical);
     @include media($tablet) { @include span-columns(3 of 10); }
     > * { float: right; }
@@ -53,14 +53,35 @@
   }
 
   .header__list {
-    float:left;
-    @include padding(null $small-spacing null $small-spacing);
-    @include transition(all .2s ease-out);
-    &:hover { background-color: $header-bg-accent-color; }
+    .header__list__item {
+      position: relative;
+      float :left;
+      @include padding(null $small-spacing null $small-spacing);
+      @include transition(all .2s ease-out);
+      &:hover { background-color: $header-bg-accent-color; }
+
+      .header__list__item_dropdown__list {
+        @include shadow(1);
+        position: absolute;
+        @include padding(null $small-spacing null $small-spacing);
+        background: $white;
+        min-width: 150px;
+        top: 100%;
+        left: 0;
+
+        .header__list__item_dropdown__list__item {
+          border-bottom: $base-border;
+        }
+        .header__list__item_dropdown__list__item:last-child {
+          border-bottom: none;
+        }
+      }
+    }
   }
 
   .header__btn {
     display: block;
+    cursor: pointer;
     color: $header-ft-color;
   }
 }
