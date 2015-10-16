@@ -49,4 +49,5 @@ group :development, :test do
   gem 'database_rewinder'
   gem 'shoulda'
   gem 'teaspoon-jasmine'
+  gem 'simplecov', require: false
 end
