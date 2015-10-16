@@ -38,4 +38,19 @@ RSpec.describe User do
   it { is_expected.to validate_length_of(:password).is_at_least(4) }
   it { is_expected.to validate_confirmation_of(:password) }
 
+  describe '#join' do
+    let(:project) { create(:project) }
+    before { user.join project, role: :admin }
+    it 'the user join a project' do
+      expect(user.member_of(project)).to be_truthy
+    end
+  end
+
+  describe '#join!' do
+    let(:project) { create(:project) }
+    before { user.join! project, role: :admin }
+    it 'is the user join a project' do
+      expect(user.member_of(project)).to be_truthy
+    end
+  end
 end

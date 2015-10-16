@@ -9,12 +9,16 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 require 'websocket_rails/spec_helpers'
+require 'simplecov'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
 Capybara.javascript_driver = :poltergeist
+
+SimpleCov.start 'rails'
+SimpleCov.minimum_coverage 90
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

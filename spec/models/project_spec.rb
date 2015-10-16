@@ -14,4 +14,12 @@ RSpec.describe Project do
   it { is_expected.to have_many(:features) }
 
   it { is_expected.to validate_presence_of(:name) }
+
+  describe '#member_of' do
+    let(:user)       { create(:user) }
+    before { user.join! project, role: :admin }
+    it 'is get member of a user' do
+      expect(project.member_of(user)).to eq user.members.first
+    end
+  end
 end

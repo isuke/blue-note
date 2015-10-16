@@ -32,10 +32,10 @@ RSpec.feature 'Progress Page', js: true do
     scenario 'show' do
       fill_in :feature_list_queue_str, with: 'status:todo,doing'
       aggregate_failures 'filter to status' do
-        project.features.where(status: [:todo, :doing]).each do |feature|
+        project.features.with_status(:todo, :doing).each do |feature|
           expect(page).to have_content feature.title
         end
-        project.features.where(status: [:done]).each do |feature|
+        project.features.with_status(:done).each do |feature|
           expect(page).not_to have_content feature.title
         end
       end
