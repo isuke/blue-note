@@ -33,7 +33,7 @@ $ ->
             toastr.success('', response.message)
             @getFeature(response.id)
             @editMode = false
-            @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, id: response.id})
+            @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, ids: [response.id]})
           .fail (response) =>
             json = response.responseJSON
             toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })

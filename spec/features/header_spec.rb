@@ -28,7 +28,7 @@ RSpec.feature 'Header', js: true do
     end
 
     scenario "show projects list when click 'Projects' button" do
-      find('.js-show_project_menu_btn').click
+      find('.header__btn', text: 'Projects').click
 
       projects.each do |project|
         expect(find('.header')).to have_link project.name
@@ -36,7 +36,7 @@ RSpec.feature 'Header', js: true do
     end
 
     scenario "show user menu when click user name button" do
-      find('.js-show_user_menu_btn').click
+      find('.header__btn', text: user.name).click
 
       expect(find('.header')).to have_link 'Logout'
     end

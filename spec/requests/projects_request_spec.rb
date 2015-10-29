@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'features request' do
+RSpec.describe 'projects request' do
   let!(:user)       { create(:user, name: 'Alice', email: 'alice@example.com', password: 'foobar') }
   let!(:other_user) { create(:user, name: 'Bob'  , email: 'bob@example.com'  , password: 'foobar') }
 

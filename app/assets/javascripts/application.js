@@ -8,5 +8,6 @@
 
 //= require core
 //= require_directory .
+//= require_tree ./parts
 //= require_tree ./mixins
 //= require_tree ./components
