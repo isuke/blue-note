@@ -6,7 +6,7 @@ toastr.options = {
   positionClass: 'toast-top-full-width'
   preventDuplicates: false
   onclick: null
-  showDuration: 500
+  showDuration: 1000
   hideDuration: 1000
   timeOut: 3000
   extendedTimeOut: 1000

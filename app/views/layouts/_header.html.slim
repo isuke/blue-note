@@ -12,17 +12,19 @@
         - if logged_in?
           li.header__list__item
             = link_to 'Dashboard', dashboard_path, class: 'header__btn'
-          li.header__list__item
-            span.header__btn.js-show_project_menu_btn v-on="click: toggleProjectMenu"
+
+          li.header__list__item.droodown
+            span.header__btn.dropdown__btn
               | Projects
-            ul.header__list__item_dropdown__list v-if="showProjectMenu"
+            ul.header__dropdown_list.dropdown__content
               - @current_user.projects.each do |project|
-                li.header__list__item_dropdown__list__item = link_to project.name, progress_path(project)
-          li.header__list__item
-            span.header__btn.js-show_user_menu_btn v-on="click: toggleUserMenu"
+                li.header__dropdown_list__item = link_to project.name, progress_path(project)
+
+          li.header__list__item.droodown
+            span.header__btn.dropdown__btn
               = @current_user.name
-            ul.header__list__item_dropdown__list v-if="showUserMenu"
-              li.header__list__item_dropdown__list__item = link_to 'Logout', '#', 'v-on': 'click: logout'
+            ul.header__dropdown_list.dropdown__content
+              li.header__dropdown_list__item = link_to 'Logout', '#', 'v-on': 'click: logout'
         - else
           li.header__list__item
             = link_to 'Login', '#', 'v-on': 'click: showLoginModal', class: 'header__btn'

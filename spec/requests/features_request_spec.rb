@@ -127,4 +127,50 @@ RSpec.describe 'features request' do
       end
     end
   end
+
+  describe 'PATCH /api/projects/:project_id/features/update_all' do
+    let(:features) { create_list(:feature, 3, project: project, status: :todo) }
+    let(:path) { "/api/projects/#{project.id}/features/update_all" }
+    let(:params) { { features: features.map { |f| { id: f.id, status: :done } } } }
+
+    it 'update the features' do
+      patch path, params
+
+      features.each do |feature|
+        feature.reload
+        expect(feature.status).to eq 'done'
+      end
+    end
+
+    it 'return success code and message' do
+      patch path, params
+
+      expect(response).to be_success
+      expect(response.status).to eq 200
+
+      expect(json['message']).to eq 'feature was successfully updated.'
+    end
+  end
+
+  describe 'DELETE /api/projects/:project_id/features/destroy_all' do
+    let(:features) { create_list(:feature, 3, project: project) }
+    let(:path) { "/api/projects/#{project.id}/features/destroy_all" }
+    let(:params) { { ids: features.map(&:id) } }
+
+    it 'destroy the features' do
+      features
+      expect do
+        delete path, params
+      end.to change(Feature, :count).by(-3)
+    end
+
+    it 'return success code and message' do
+      delete path, params
+
+      expect(response).to be_success
+      expect(response.status).to eq 200
+
+      expect(json['message']).to eq 'feature was successfully destroyed.'
+    end
+  end
 end

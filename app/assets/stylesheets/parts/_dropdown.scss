@@ -1,0 +1,17 @@
+.droodown {
+  /*** variables **************************************************************/
+  $dropdown-shadow-depth: 1;
+  /****************************************************************************/
+
+  position: relative;
+
+  .dropdown__btn {}
+
+  .dropdown__content {
+    @include shadow($dropdown-shadow-depth);
+    position: absolute;
+    @include padding(null $small-spacing null $small-spacing);
+    top: 100%;
+    left: 0;
+  }
+}

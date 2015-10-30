@@ -13,7 +13,10 @@ $ ->
       @channel = @dispatcher.subscribe("project_#{@projectId}")
 
       @channel.bind 'features.got', (data) =>
-        @$.division3View.addOrUpdateFeature(data) if @$.division3View.addOrUpdateFeature
+        @$.division3View.addOrUpdateFeatures(data) if @$.division3View.addOrUpdateFeatures
+
+      @channel.bind 'features.deleted', (data) =>
+        @$.division3View.removeFeature(data) if @$.division3View.removeFeature
 
   page hashbang: true, dispatch: false
   page 'featureNew', (ctx) ->

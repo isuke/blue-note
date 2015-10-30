@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   namespace :api, format: :json do
     resources :users   , only: [:create]
     resources :projects, only: [:index], shallow: true do
-      resources :features, only: [:index, :show, :create, :update]
+      resources :features, only: [:index, :show, :create, :update] do
+        patch  :update_all , on: :collection
+        delete :destroy_all, on: :collection
+      end
     end
     match '/sign_up', to: 'users#create'         , via: :post
     match '/login'  , to: 'user_sessions#create' , via: :post

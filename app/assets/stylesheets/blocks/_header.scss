@@ -54,28 +54,10 @@
 
   .header__list {
     .header__list__item {
-      position: relative;
       float :left;
       @include padding(null $small-spacing null $small-spacing);
       @include transition(all .2s ease-out);
       &:hover { background-color: $header-bg-accent-color; }
-
-      .header__list__item_dropdown__list {
-        @include shadow(1);
-        position: absolute;
-        @include padding(null $small-spacing null $small-spacing);
-        background: $white;
-        min-width: 150px;
-        top: 100%;
-        left: 0;
-
-        .header__list__item_dropdown__list__item {
-          border-bottom: $base-border;
-        }
-        .header__list__item_dropdown__list__item:last-child {
-          border-bottom: none;
-        }
-      }
     }
   }
 
@@ -83,5 +65,17 @@
     display: block;
     cursor: pointer;
     color: $header-ft-color;
+  }
+
+  .header__dropdown_list {
+    background: $white;
+    min-width: 150px;
+
+    .header__dropdown_list__item {
+      border-bottom: $base-border;
+    }
+    .header__dropdown_list__item:last-child {
+      border-bottom: none;
+    }
   }
 }

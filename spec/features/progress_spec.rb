@@ -28,7 +28,7 @@ RSpec.feature 'Progress Page', js: true do
     expect(page).to have_css '#feature_new' , visible: false
   end
 
-  feature 'featuer list' do
+  feature 'feature list' do
     scenario 'show' do
       fill_in :feature_list_queue_str, with: 'status:todo,doing'
       aggregate_failures 'filter to status' do
@@ -62,9 +62,33 @@ RSpec.feature 'Progress Page', js: true do
       expect(page).to have_button 'Back'
       expect(page).to have_button 'Edit'
     end
+
+    scenario 'delete selected feature when click delete button' do
+      pending("this is faild")
+
+      target_features = [features[0], features[1], features[2]]
+
+      target_features.each do |feature|
+        expect(find('.feature_list')).to have_content feature.title
+      end
+
+      target_features.each do |feature|
+        check("feature_#{feature.id}_selected_check")
+      end
+
+      find('.feature_list__menu').click_on('delete')
+      wait_for_ajax
+      sleep 0.5
+
+      target_features.each do |feature|
+        expect(find('.feature_list')).not_to have_content feature.title
+      end
+    end
+
+    scenario 'update feature status when click status update button'
   end
 
-  feature 'featuer show' do
+  feature 'feature show' do
     let(:feature) { features.first }
     background do
       fill_in :feature_list_queue_str, with: ''
@@ -110,7 +134,7 @@ RSpec.feature 'Progress Page', js: true do
         sleep 0.5
       end
 
-      scenario 'back to featuere show when to cancel button' do
+      scenario 'back to feature show when to cancel button' do
         find('.feature_show').fill_in :title , with: 'edited title'
         find('.feature_show').fill_in :point , with: '1'
         find('.feature_show').select 'Done', from:  :status
@@ -128,7 +152,7 @@ RSpec.feature 'Progress Page', js: true do
         expect(page).to have_button 'Edit'
       end
 
-      scenario 'update the featuere when to update button' do
+      scenario 'update the feature when to update button' do
         find('.feature_show').fill_in :title , with: 'edited title'
         find('.feature_show').fill_in :point , with: '1'
         find('.feature_show').select 'Done', from:  :status
@@ -148,7 +172,7 @@ RSpec.feature 'Progress Page', js: true do
     end
   end
 
-  feature 'new featuer' do
+  feature 'new feature' do
     scenario 'create new feature when click create button with correct values' do
       aggregate_failures do
         fill_in :new_feature_title, with: 'my new feature'

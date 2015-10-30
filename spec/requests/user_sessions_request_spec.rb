@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'features request' do
+RSpec.describe 'user sessions request' do
   let!(:user) { create(:user, name: 'Alice', email: 'alice@example.com', password: 'foobar') }
 
   describe 'POST /api/login' do
