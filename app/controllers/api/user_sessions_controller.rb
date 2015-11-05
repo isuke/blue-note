@@ -1,4 +1,4 @@
-class Api::UserSessionsController < ApplicationController
+class Api::UserSessionsController < Api::ApiController
   skip_before_action :require_login, only: [:create]
 
   def create

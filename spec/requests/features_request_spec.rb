@@ -43,7 +43,7 @@ RSpec.describe 'features request' do
     let(:path) { "/api/projects/#{project.id}/features" }
 
     context 'with correct parameter' do
-      let(:params) { { feature: { title: 'implement hoge', priority: '1', point: '1' } } }
+      let(:params) { { feature: { title: 'implement hoge', point: '1' } } }
 
       it 'create a feature' do
         expect do
@@ -63,7 +63,7 @@ RSpec.describe 'features request' do
     end
 
     context 'with uncorrect parameter' do
-      let(:params) { { feature: { title: 'implement hoge', priority: '0', point: '1' } } }
+      let(:params) { { feature: { title: '', point: '1' } } }
 
       it 'do not create a feature' do
         expect do
@@ -82,12 +82,12 @@ RSpec.describe 'features request' do
     end
   end
 
-  describe 'POST /api/features/:id' do
-    let(:feature) { create(:feature, project: project, title: 'implement hoge', priority: '1', point: '1', status: 'todo') }
+  describe 'PATCH /api/features/:id' do
+    let(:feature) { create(:feature, project: project, title: 'implement hoge', point: '1', status: 'todo') }
     let(:path) { "/api/features/#{feature.id}" }
 
     context 'with correct parameter' do
-      let(:params) { { feature: { title: 'upgrade hoge', priority: '2', point: '2', status: 'doing' } } }
+      let(:params) { { feature: { title: 'upgrade hoge', point: '2', status: 'doing' } } }
 
       it 'return success code and message' do
         patch path, params
@@ -101,14 +101,13 @@ RSpec.describe 'features request' do
         feature.reload
 
         expect(feature.title).to    eq 'upgrade hoge'
-        expect(feature.priority).to eq 2
         expect(feature.point).to    eq 2
         expect(feature.status).to   eq 'doing'
       end
     end
 
     context 'with uncorrect parameter' do
-      let(:params) { { feature: { title: 'upgrade hoge', priority: '0', point: '2', status: 'doing' } } }
+      let(:params) { { feature: { title: '', point: '2', status: 'doing' } } }
 
       it 'return 422 Unprocessable Entity code and message' do
         patch path, params
@@ -121,9 +120,49 @@ RSpec.describe 'features request' do
         feature.reload
 
         expect(feature.title).not_to    eq 'upgrade hoge'
-        expect(feature.priority).not_to eq 0
         expect(feature.point).not_to    eq 2
         expect(feature.status).not_to   eq 'doing'
+      end
+    end
+  end
+
+  describe 'PATCH /api/features/:id/update_priority' do
+    before { 5.times { |i| create(:feature, project: project, priority: i + 1) } }
+
+    let(:feature) { create(:feature, project: project, priority: 5) }
+    let(:path) { "/api/features/#{feature.id}/update_priority" }
+
+    context 'with number param' do
+      let(:params) { { insert_at: 2 } }
+
+      it 'return success code and message' do
+        patch path, params
+
+        expect(response).to be_success
+        expect(response.status).to eq 201
+
+        expect(json['message']).to eq 'feature was successfully updated.'
+
+        feature.reload
+
+        expect(feature.priority).to eq 2
+      end
+    end
+
+    context 'with nil param' do
+      let(:params) { { insert_at: nil } }
+
+      it 'return success code and message' do
+        patch path, params
+
+        expect(response).to be_success
+        expect(response.status).to eq 201
+
+        expect(json['message']).to eq 'feature was successfully updated.'
+
+        feature.reload
+
+        expect(feature.priority).to eq nil
       end
     end
   end
@@ -146,7 +185,7 @@ RSpec.describe 'features request' do
       patch path, params
 
       expect(response).to be_success
-      expect(response.status).to eq 200
+      expect(response.status).to eq 201
 
       expect(json['message']).to eq 'feature was successfully updated.'
     end

@@ -1,0 +1,35 @@
+.feature_list .feature_list__menu {
+  /*** variables **************************************************************/
+  /****************************************************************************/
+
+  .feature_list__menu__filter { display: inline; }
+  .feature_list__menu__action { display: inline; padding-left: $small-spacing }
+
+  padding-bottom: $small-spacing;
+
+  .feature_list__menu__item {
+    display: inline-block;
+
+    .feature_list__menu__item__btn {
+      background: $white;
+      padding: 0.5em 1em;
+      background: $white;
+      color: $action-color;
+      border: $base-border;
+      border-right: none;
+      border-radius: 0;
+    }
+  }
+  .feature_list__menu__item:first-child > .feature_list__menu__item__btn {
+    @include border-left-radius($base-border-radius);
+  }
+  .feature_list__menu__item:last-child > .feature_list__menu__item__btn {
+    @include border-right-radius($base-border-radius);
+    border-right: $base-border;
+  }
+
+  .feature_list__menu__dropdown_list {
+    padding: $small-spacing;
+    background: $white;
+  }
+}

@@ -1,24 +1,12 @@
-class Api::UsersController < ApplicationController
+class Api::UsersController < Api::ApiController
   skip_before_action :require_login, only: [:create]
 
   def create
     @user = User.new(user_params)
     if @user.save
-      render(
-        json: {
-          id: @user.id,
-          message: I18n.t('action.create.success', model: I18n.t('activerecord.models.user')),
-        },
-        status: :created,
-      )
+      render_action_model_success_message(@user, :create)
     else
-      render(
-        json: {
-          message: I18n.t('action.create.fail', model: I18n.t('activerecord.models.user')),
-          errors: { messages: @user.errors.messages, full_messages: @user.errors.full_messages },
-        },
-        status: :unprocessable_entity,
-      )
+      render_action_model_fail_message(@user, :create)
     end
   end
 

@@ -7,12 +7,31 @@ $ ->
       featureList: []
       queryStr: 'status:todo,doing'
       schema:
-        title:  'like'
-        point:  'int'
-        status: 'enum'
+        priority: 'int'
+        title:    'like'
+        point:    'int'
+        status:   'enum'
       status: undefined
     compiled: ->
       @load()
+    ready: ->
+      new Sortable document.getElementById('feature_list__items--exists_priority'),
+        group:
+          name: 'feature_list__items--exists_priority'
+          put: ['feature_list__items--not_exists_priority']
+        chosenClass: 'feature_list__items__item--chosen'
+        animation: 150
+        sort: true
+        onAdd: (evt) => @sort(evt, false)
+        onUpdate: (evt) => @sort(evt, false)
+        onRemove: (evt) => @sort(evt, true)
+      new Sortable document.getElementById('feature_list__items--not_exists_priority'),
+        group:
+          name: 'feature_list__items--not_exists_priority'
+          put: ['feature_list__items--exists_priority']
+        chosenClass: 'feature_list__items__item--chosen'
+        animation: 150
+        sort: false
     computed:
       filteredFeatureList: ->
         @filter @featureList
@@ -37,10 +56,10 @@ $ ->
               ids: _.pluck @selectedFeatureList, 'id'
           .done (response) =>
             toastr.success('', response.message)
-            @dispatcher.trigger('features.delete', { user_id: @userId, project_id: @projectId, ids: response.ids })
+            @dispatcher.trigger('features.delete', { user_id: @userId, project_id: @projectId, ids: response.ids, show_message: true })
           .fail (response) =>
             json = response.responseJSON
-            toastr.error('', response.message, { timeOut: 0 })
+            toastr.error('', json.message, { timeOut: 0 })
       updateStatus: ->
         return if @selectedFeatureList.length <= 0
         params = []
@@ -58,31 +77,50 @@ $ ->
           @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, ids: response.ids})
         .fail (response) =>
           json = response.responseJSON
-          toastr.error('', response.message, { timeOut: 0 })
+          toastr.error('', json.message, { timeOut: 0 })
       addOrUpdateFeatures: (data) ->
         $.each data.features, (index, feature) =>
           if _.findKey @featureList, {id: feature.id}
-            @updateFeature data.user, feature
+            @updateFeature data.user, feature, data.show_message
           else
-            @addFeature data.user, feature
-      addFeature: (user, feature) ->
-        if user.id.toString() != @userId
+            @addFeature data.user, feature, data.show_message
+      addFeature: (user, feature, show_message = true) ->
+        if show_message && user.id.toString() != @userId
           toastr.info('', "#{user.name}: created #{feature.title}", { timeOut: 0 })
         newFeature = feature
         newFeature.$add('selected', false)
         @featureList.push(newFeature)
-      updateFeature: (user, feature) ->
-        if user.id.toString() != @userId
+      updateFeature: (user, feature, show_message = true) ->
+        if show_message && user.id.toString() != @userId
           toastr.info('', "#{user.name}: updated #{feature.title}", { timeOut: 0 })
-
         index = _.findIndex @featureList, {id: feature.id}
         feature.$add('selected', @featureList[index].selected)
         @featureList.$set index, feature
-      removeFeature: (data) ->
-        if data.user.id.toString() != @userId
+      removeFeature: (data, show_message = true) ->
+        if show_message && data.user.id.toString() != @userId
           toastr.info('', "#{data.user.name}: deleted feature", { timeOut: 0 })
         @featureList = _.reject @featureList, (feature) ->
           _.includes data.ids, feature.id.toString()
       show: (feature) ->
         featureId = feature.$el.id.match(/feature_(\d+)/)[1]
         page "featureShow/#{featureId}"
+      sort: (evt, remove) ->
+        featureId = evt.item.id.match(/feature_(\d+)/)[1]
+
+        insert_at = null
+        insert_at = evt.newIndex+1 unless remove
+
+        $.ajax
+          url: "/api/features/#{featureId}/update_priority.json"
+          type: 'PATCH'
+          dataType: 'json'
+          contentType: 'application/json'
+          data:
+            JSON.stringify(insert_at: insert_at)
+        .done (response) =>
+          toastr.success('', response.message)
+          @dispatcher.trigger('features.get', { user_id: @userId, project_id: @projectId, ids: response.ids, show_message: false })
+        .fail (response) =>
+          json = response.responseJSON
+          window.aaa = response
+          toastr.error('', json.message, { timeOut: 0 })

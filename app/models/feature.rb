@@ -24,6 +24,7 @@ class Feature < ActiveRecord::Base
   extend Enumerize
 
   belongs_to :project
+  acts_as_list scope: :project, column: :priority, top_of_list: 1, add_new_at: nil
 
   enumerize :status, in: { todo: 10, doing: 20, done: 30 }, default: :todo, scope: true
 
