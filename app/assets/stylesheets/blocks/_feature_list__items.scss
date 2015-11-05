@@ -1,0 +1,60 @@
+.feature_list .feature_list__items {
+  /*** variables **************************************************************/
+  /****************************************************************************/
+
+  .feature_list__items__item {
+    @include row(table);
+    border-bottom: $base-border;
+
+    cursor: move;
+
+    @include transition(all .2s ease-out);
+    &:hover { background-color: $white-bg-darken-color; }
+
+    .feature_list__items__contents {
+      .feature_list__items__contents__item__division1 {
+        @include centering(both);
+        @include span-columns(1 of 16);
+        max-width: 50px;
+        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+      }
+      .feature_list__items__contents__item__division2 {
+        @include centering(both);
+        @include span-columns(1 of 16);
+        max-width: 50px;
+        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+      }
+      .feature_list__items__contents__item__division3 {
+        @include span-columns(2 of 16);
+        max-width: 80px;
+        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+      }
+      .feature_list__items__contents__item__division4 {
+        @include span-columns(12 of 16);
+        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+      }
+      .feature_list__items__contents__item__title {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .feature_list__items__item--chosen {
+    @include transform(rotate(-2deg));
+  }
+  .feature_list__items__item:nth-child(1) { border-top: $base-border; }
+  .feature_list__items__item--selected {
+    @extend .feature_list__items__item;
+    background-color: $theme-bg-color;
+    color: $theme-ft-color;
+    &:hover { background-color: $theme-bg-darken-color; }
+  }
+
+  .feature_list__items__separator {
+    margin: 0;
+    border-bottom: 5px solid $theme-color;
+  }
+}

@@ -23,7 +23,7 @@ $ ->
             toastr.success('', response.message)
             @feature.title = ''
             @feature.point = ''
-            @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, ids: [response.id]})
+            @dispatcher.trigger('features.get', { user_id: @userId, project_id: @projectId, ids: [response.id], show_message: true })
           .fail (response) =>
             json = response.responseJSON
             toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })

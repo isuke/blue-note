@@ -34,6 +34,8 @@ module BlueNote
 
     config.generators { |g| g.factory_girl suffix: 'factory' }
 
+    config.autoload_paths += %W(#{config.root}/app/controllers/api/concerns)
+
     config.annotations.register_extensions('scss')   { |annotation| %r{//\s*(#{annotation}):?\s*(.*?)$} }
     config.annotations.register_extensions('slim')   { |annotation| %r{/\s*(#{annotation}):?\s*(.*?)$} }
     config.annotations.register_extensions('coffee') { |annotation|   /#\s*(#{annotation}):?\s*(.*?)$/ }

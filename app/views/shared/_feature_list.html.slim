@@ -1,19 +1,7 @@
 script type='text/x-template' id='feature_list'
   .feature_list
-    input.feature_list__query [name='feature_list_queue_str' type='text' v-model='queryStr' lazy]
+    == render 'shared/feature_list__query'
+
     == render 'shared/feature_list__menu'
 
-    ul
-      li [
-        v-repeat = "filteredFeatureList"
-        id       = "feature_{{id}}"
-        class    = "{{selected ? 'feature_list__item--selected' : 'feature_list__item'}}"
-        track-by = "id"
-      ]
-        .feature_list__item__division1
-          input type="checkbox" id="feature_{{id}}_selected_check" v-model="selected"
-        .feature_list__item__division2
-          .feature_list__item__status      v-text="status" class="{{'label--'+status}}"
-          .feature_list__item__point.badge v-text="point == null ? '-' : point"
-        .feature_list__item__division3
-          .feature_list__item__title v-text="title" v-on="click: show(this)"
+    == render 'shared/feature_list__items'

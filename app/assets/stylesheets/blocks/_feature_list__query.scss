@@ -1,4 +1,7 @@
-.feature_list {
+.feature_list .feature_list__query {
   /*** variables **************************************************************/
+  $feature_list__query-ft-color: $white-ft-color;
   /****************************************************************************/
+
+  color: $feature_list__query-ft-color
 }

@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'pg'
 gem 'websocket-rails'
 gem 'authlogic'
+gem 'acts_as_list'
 gem 'slim'
 gem 'enumerize'
 gem 'bourbon'
@@ -20,6 +21,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-vue'
   gem 'rails-assets-page'
   gem 'rails-assets-toastr'
+  gem 'rails-assets-Sortable'
 end
 
 group :development do

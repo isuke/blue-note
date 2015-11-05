@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :users   , only: [:create]
     resources :projects, only: [:index], shallow: true do
       resources :features, only: [:index, :show, :create, :update] do
+        patch  :update_priority, on: :member
         patch  :update_all , on: :collection
         delete :destroy_all, on: :collection
       end

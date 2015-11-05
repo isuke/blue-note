@@ -1,0 +1,20 @@
+.feature_list__items
+  ul#feature_list__items--exists_priority
+    li [
+      v-repeat = "filteredFeatureList | only 'exists' in 'priority' | orderBy 'priority'"
+      id       = "feature_{{id}}"
+      class    = "{{selected ? 'feature_list__items__item--selected' : 'feature_list__items__item'}}"
+      track-by = "id"
+    ]
+      == render 'shared/feature_list__items__contents'
+
+  hr.feature_list__items__separator
+
+  ul#feature_list__items--not_exists_priority
+    li [
+      v-repeat = "filteredFeatureList | only 'not exists' in 'priority' | orderBy 'updatedBy'"
+      id       = "feature_{{id}}"
+      class    = "{{selected ? 'feature_list__items__item--selected' : 'feature_list__items__item'}}"
+      track-by = "id"
+    ]
+      == render 'shared/feature_list__items__contents'

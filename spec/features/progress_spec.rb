@@ -54,7 +54,7 @@ RSpec.feature 'Progress Page', js: true do
     scenario 'show feature show view when click feature title' do
       feature = features.first
 
-      find("#feature_#{feature.id}").find('.feature_list__item__title').click
+      find("#feature_#{feature.id}").find('.feature_list__items__contents__item__title').click
 
       wait_for_ajax
       sleep 0.5
@@ -92,7 +92,7 @@ RSpec.feature 'Progress Page', js: true do
     let(:feature) { features.first }
     background do
       fill_in :feature_list_queue_str, with: ''
-      find("#feature_#{feature.id}").find('.feature_list__item__title').click
+      find("#feature_#{feature.id}").find('.feature_list__items__contents__item__title').click
 
       wait_for_ajax
       sleep 0.5
