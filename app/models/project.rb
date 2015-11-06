@@ -12,7 +12,8 @@
 class Project < ActiveRecord::Base
   has_many :members
   has_many :users, through: :members
-  has_many :features, -> { order(priority: :asc) }
+  has_many :features  , -> { order(priority: :asc) }
+  has_many :iterations, -> { order(number: :asc) }
 
   validates :name, presence: true
 

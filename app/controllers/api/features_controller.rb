@@ -6,7 +6,7 @@ class Api::FeaturesController < Api::ApiController
 
   def index
     @features = @project.features
-    render json: @features, status: :ok
+    render 'jsons/features', formats: :json, handlers: :jbuilder
   end
 
   def show

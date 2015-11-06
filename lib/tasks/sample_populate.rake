@@ -7,6 +7,7 @@ namespace :db do
         populate_projects
         populate_members
         populate_features
+        populate_iterations
       end
     end
 
@@ -45,6 +46,16 @@ namespace :db do
       Feature.destroy_all
       Project.all.each do |p|
         FactoryGirl.create_list(:feature, num, project: p)
+      end
+    end
+
+    def populate_iterations
+      puts "populate iterations"
+      Iteration.destroy_all
+      Project.all.each do |p|
+        3.times do |i|
+          FactoryGirl.create(:iteration, project: p, number: i + 1)
+        end
       end
     end
   end

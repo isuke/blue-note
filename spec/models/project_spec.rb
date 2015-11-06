@@ -5,6 +5,7 @@ RSpec.describe Project do
   subject { project }
 
   it { is_expected.to respond_to(:features) }
+  it { is_expected.to respond_to(:iterations) }
   it { is_expected.to respond_to(:name) }
 
   it { is_expected.to respond_to(:member_of) }
@@ -12,6 +13,7 @@ RSpec.describe Project do
   it { is_expected.to have_many(:members) }
   it { is_expected.to have_many(:users) }
   it { is_expected.to have_many(:features) }
+  it { is_expected.to have_many(:iterations) }
 
   it { is_expected.to validate_presence_of(:name) }
 
