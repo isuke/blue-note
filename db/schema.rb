@@ -11,25 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819163656) do
+ActiveRecord::Schema.define(version: 20151106021524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "features", force: :cascade do |t|
-    t.integer  "project_id", null: false
-    t.string   "title",      null: false
-    t.integer  "status",     null: false
+    t.integer  "project_id",   null: false
+    t.string   "title",        null: false
+    t.integer  "status",       null: false
     t.integer  "priority"
     t.integer  "point"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "iteration_id"
   end
 
   add_index "features", ["project_id", "point"], name: "index_features_on_project_id_and_point", using: :btree
   add_index "features", ["project_id", "priority"], name: "index_features_on_project_id_and_priority", using: :btree
   add_index "features", ["project_id", "status"], name: "index_features_on_project_id_and_status", using: :btree
   add_index "features", ["project_id"], name: "index_features_on_project_id", using: :btree
+
+  create_table "iterations", force: :cascade do |t|
+    t.integer  "project_id", null: false
+    t.integer  "number",     null: false
+    t.date     "start_at",   null: false
+    t.date     "end_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "iterations", ["project_id", "number"], name: "index_iterations_on_project_id_and_number", unique: true, using: :btree
+  add_index "iterations", ["project_id"], name: "index_iterations_on_project_id", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.integer  "user_id",    null: false

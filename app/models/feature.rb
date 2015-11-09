@@ -1,16 +1,17 @@
 # == Schema Information
-# Schema version: 20150617174858
+# Schema version: 20151106021524
 #
 # Table name: features
 #
-#  id         :integer          not null, primary key
-#  project_id :integer          not null
-#  title      :string           not null
-#  status     :integer          not null
-#  priority   :integer
-#  point      :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  project_id   :integer          not null
+#  title        :string           not null
+#  status       :integer          not null
+#  priority     :integer
+#  point        :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  iteration_id :integer
 #
 # Indexes
 #
@@ -24,6 +25,7 @@ class Feature < ActiveRecord::Base
   extend Enumerize
 
   belongs_to :project
+  belongs_to :iteration
   acts_as_list scope: :project, column: :priority, top_of_list: 1, add_new_at: nil
 
   enumerize :status, in: { todo: 10, doing: 20, done: 30 }, default: :todo, scope: true
