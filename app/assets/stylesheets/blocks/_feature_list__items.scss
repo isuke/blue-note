@@ -1,6 +1,13 @@
 .feature_list .feature_list__items {
   /*** variables **************************************************************/
+  $feature_list__items_max_height: 400px;
   /****************************************************************************/
+
+  .feature_list__items__outer {
+    min-height: $base-spacing;
+    max-height: $feature_list__items_max_height;
+    overflow: scroll;
+  }
 
   .feature_list__items__item {
     @include row(table);
