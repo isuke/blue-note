@@ -1,9 +1,8 @@
 script type='text/x-template' id='project_list'
   .project_list
-    h6.project_list__title Projects
     ul
       li [
-        v-repeat = "projectList"
+        v-repeat = "projectList | orderBy 'created_at'"
         id       = "project_{{id}}"
         class    = "project_list__item"
         v-on     = "click: linkTo(this)"

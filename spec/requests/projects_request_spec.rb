@@ -23,4 +23,48 @@ RSpec.describe 'projects request' do
       expect(json.count).to eq 2
     end
   end
+
+  describe 'POST /api/projects' do
+    let(:path) { "/api/projects" }
+
+    context 'with correct parameter' do
+      let(:params) { { project: { name: 'my project' } } }
+
+      it 'create a project' do
+        expect do
+          post path, params
+        end.to change(Project, :count).by(1)
+      end
+
+      it 'return success code and message' do
+        post path, params
+
+        expect(response).to be_success
+        expect(response.status).to eq 201
+
+        expect(json['id']).not_to eq nil
+        expect(json['message']).to eq 'project was successfully created.'
+      end
+    end
+
+    context 'with uncorrect parameter' do
+      let(:params) { { project: { name: '' } } }
+
+      it 'do not create a project' do
+        expect do
+          post path, params
+        end.not_to change(Project, :count)
+      end
+
+      it 'return 422 Unprocessable Entity code and message' do
+        post path, params
+
+        expect(response).not_to be_success
+        expect(response.status).to eq 422
+
+        expect(json['message']).to eq 'project could not be created.'
+      end
+    end
+  end
+
 end
