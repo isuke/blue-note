@@ -8,4 +8,7 @@
 #dashboard.dashboard
   = hidden_field_tag :current_user_id, @current_user.id, 'v-model': 'currentUserId'
 
-  == render partial: 'pages/dashboard__projects'
+  .dashboard__projects
+    h6.dashboard__projects__title Projects
+    == render partial: 'pages/dashboard__project_list'
+    == render partial: 'pages/dashboard__project_new'

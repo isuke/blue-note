@@ -3,10 +3,6 @@
   $project-list-ft-item-name-color: $action-color;
   /****************************************************************************/
 
-  .project_list__title {
-    @include padding($base-spacing $small-spacing $base-spacing $small-spacing);
-  }
-
   .project_list__item {
     @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
     border-bottom: $base-border;

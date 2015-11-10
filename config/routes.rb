@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api, format: :json do
     resources :users   , only: [:create]
-    resources :projects, only: [:index], shallow: true do
+    resources :projects, only: [:index, :create], shallow: true do
       resources :iterations, only: [:index]
       resources :features  , only: [:index, :show, :create, :update] do
         patch  :update_priority, on: :member
