@@ -1,0 +1,55 @@
+.members_settings {
+  /*** variables **************************************************************/
+  $members-settings-button-height: $base-font-size * 2.5;
+  /****************************************************************************/
+
+  .members_settings__member_list {
+    .members_settings__member_list__item {
+      @include row;
+      padding: $small-spacing;
+      border-bottom: $base-border;
+      @include transition(all .2s ease-out);
+
+      &:hover { background-color: $white-bg-darken-color; }
+      &:nth-child(1) { border-top: $base-border; }
+
+      .members_settings__member_list__item--user_role {
+        @include span-columns(2 of 16);
+      }
+      .members_settings__member_list__item--user_name {
+        @include span-columns(7 of 16);
+      }
+      .members_settings__member_list__item--user_email {
+        @include span-columns(7 of 16);
+      }
+    }
+  }
+
+  .members_settings__member_new {
+    @include row;
+    .members_settings__member_new__item {
+      display: inline-block;
+      height: $members-settings-button-height;
+    }
+    .members_settings__member_new__item--email {
+      @extend .members_settings__member_new__item;
+      @include span-columns(6 of 12);
+      margin-right: 0;
+      @include border-right-radius(0);
+    }
+    .members_settings__member_new__item--role {
+      @extend .members_settings__member_new__item;
+      @include span-columns(3 of 12);
+      margin-left: 0;
+      margin-right: 0;
+      @include border-left-radius(0);
+      @include border-right-radius(0);
+    }
+    .members_settings__member_new__item--submit {
+      @extend .members_settings__member_new__item;
+      @include span-columns(3 of 12);
+      margin-left: 0;
+      @include border-left-radius(0);
+    }
+  }
+}

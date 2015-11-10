@@ -6,12 +6,20 @@
 
   background-color: $dashboard-bg-color;
 
+  @include row;
+
+  .dashboard__left {
+    @include span-columns(5 of 10);
+  }
+  .dashboard__right {
+    @include span-columns(5 of 10);
+  }
+
   .dashboard__projects {
     background-color: $dashboard-bg-color;
-    @include span-columns(5 of 10);
     @include pad($small-spacing);
 
-    .dasbhboard__projects__title {
+    .dashboard__projects__title {
       @include padding($base-spacing $small-spacing $base-spacing $small-spacing);
     }
   }

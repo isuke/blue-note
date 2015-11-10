@@ -1,0 +1,8 @@
+.dashboard_sidemenu.sidemenu
+  ul.sidemenu__list
+    - if yield(:sidemenu_dashboard).empty?
+      = link_to dashboard_path do
+        li.sidemenu__list__item Dashboard
+    - else
+      li.sidemenu__list__item--active
+        == yield :sidemenu_dashboard

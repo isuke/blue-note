@@ -5,7 +5,8 @@ class Api::FeaturesController < Api::ApiController
   before_action :set_feature, only: [:show, :update, :update_priority]
 
   def index
-    @features = @project.features
+    @features = @project.features.includes(:iteration)
+
     render 'jsons/features', formats: :json, handlers: :jbuilder
   end
 

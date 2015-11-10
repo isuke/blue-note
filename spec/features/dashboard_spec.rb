@@ -8,10 +8,12 @@ RSpec.feature 'Dashboard Page', js: true do
 
   subject { page }
 
+  scenario 'show' do
+    expect(find('.header')).to have_content 'Dashboard'
+  end
+
   feature 'project list' do
     scenario 'show' do
-      expect(find('.header')).to have_content 'Dashboard'
-
       projects.each do |project|
         expect(page).to have_content project.name
       end
@@ -32,7 +34,7 @@ RSpec.feature 'Dashboard Page', js: true do
       wait_for_ajax
       sleep 0.5
 
-      expect(find('.project_list')).to have_content 'New Project'
+      expect(find('.projects__project_list')).to have_content 'New Project'
     end
   end
 end

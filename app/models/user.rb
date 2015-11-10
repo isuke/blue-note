@@ -29,12 +29,16 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 50 }
 
+  def member_build(project, role: :general)
+    members.build(project: project, role: role)
+  end
+
   def join(project, role: :general)
-    members.build(project: project, role: role).save
+    member_build(project, role: role).save
   end
 
   def join!(project, role: :general)
-    members.build(project: project, role: role).save!
+    member_build(project, role: role).save!
   end
 
   def member_of(project)

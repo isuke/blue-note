@@ -1,0 +1,17 @@
+script type='text/x-template' id='projects'
+  .projects
+    .projects__project_list
+      ul
+        li [
+          v-repeat = "projectList | orderBy 'created_at'"
+          id       = "project_{{id}}"
+          class    = "projects__project_list__item"
+          v-on     = "click: linkTo(this)"
+          track-by = "id"
+        ]
+          .projects__project_list__item--name v-text="name"
+
+    .projects__project_new
+      = form_tag api_projects_path, class: 'projects__project_new__form' do
+        = text_field_tag :project_name, nil, 'v-model': 'project.name', class: 'projects__project_new__form__item--title' , placeholder: 'name'
+        = submit_tag 'Create Project', 'v-on': 'click : submit', class: 'projects__project_new__form__item--submit'

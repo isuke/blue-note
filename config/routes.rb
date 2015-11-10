@@ -6,11 +6,13 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'pages#dashboard'
   scope path: '/projects/:project_id' do
     get 'progress', to: 'pages#progress'
+    get 'project_settings', to: 'pages#project_settings'
   end
 
   namespace :api, format: :json do
     resources :users   , only: [:create]
     resources :projects, only: [:index, :create], shallow: true do
+      resources :members   , only: [:index, :create]
       resources :iterations, only: [:index]
       resources :features  , only: [:index, :show, :create, :update] do
         patch  :update_priority, on: :member

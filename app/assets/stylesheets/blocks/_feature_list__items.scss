@@ -17,6 +17,7 @@
 
     @include transition(all .2s ease-out);
     &:hover { background-color: $white-bg-darken-color; }
+    &:nth-child(1) { border-top: $base-border; }
 
     .feature_list__items__contents {
       .feature_list__items__contents__item__division1 {
@@ -52,7 +53,6 @@
   .feature_list__items__item--chosen {
     @include transform(rotate(-2deg));
   }
-  .feature_list__items__item:nth-child(1) { border-top: $base-border; }
   .feature_list__items__item--selected {
     @extend .feature_list__items__item;
     background-color: $theme-bg-color;
