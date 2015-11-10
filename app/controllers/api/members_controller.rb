@@ -1,5 +1,9 @@
 class Api::MembersController < Api::ApiController
+  include MemberAuthorizeConcern
+
   before_action :set_project, only: [:index, :create]
+  before_action -> { member_authorize @project                 }, only: [:index]
+  before_action -> { member_authorize @project, only: [:admin] }, only: [:create]
 
   def index
     @members = @project.members.includes(:user)

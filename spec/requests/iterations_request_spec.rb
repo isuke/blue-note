@@ -5,6 +5,7 @@ RSpec.describe 'iterations request' do
   let!(:project) { create(:project) }
 
   before { login(user) }
+  before { user.join!(project) }
 
   describe 'GET /api/projects/:project_id/iterations' do
     let!(:iteration1) { create(:iteration, project: project) }

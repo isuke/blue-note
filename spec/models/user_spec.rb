@@ -13,9 +13,11 @@ RSpec.describe User do
   it { is_expected.to respond_to(:current_login_at) }
   it { is_expected.to respond_to(:last_login_at) }
 
+  it { is_expected.to respond_to(:member_build) }
   it { is_expected.to respond_to(:join) }
   it { is_expected.to respond_to(:join!) }
   it { is_expected.to respond_to(:member_of) }
+  it { is_expected.to respond_to(:role_in) }
 
   it { is_expected.to have_many(:members) }
   it { is_expected.to have_many(:projects) }

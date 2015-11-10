@@ -15,6 +15,7 @@ RSpec.feature 'Progress Page', js: true do
     end
   end
   background { login user, with_capybara: true }
+  background { user.join!(project) }
   background { visit progress_path(project) }
 
   subject { page }
