@@ -3,8 +3,10 @@
 - provide(:title    , 'Progress')
 - provide(:sub_title, @project.name)
 
-- content_for :sidemenu_progress do
-  | Progress
+- content_for :sidemenu do
+  - content_for :sidemenu_progress do
+    | Progress
+  == render partial: 'shared/project_sidemenu', locals: { project: @project }
 
 #progress.progress
   = hidden_field_tag :user_id   , @current_user.id   , 'v-model': 'userId'

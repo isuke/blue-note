@@ -1,11 +1,23 @@
 $ ->
-  Vue.component 'projectNew',
-    template: '#project_new'
+  Vue.component 'projects',
+    template: '#projects'
     inherit: true
     data: ->
+      projectList: []
       project:
         name: ''
+    compiled: ->
+      @load()
     methods:
+      load: ->
+        $.ajax "/api/projects.json"
+          .done (response) =>
+            @projectList = response
+          .fail (response) =>
+            console.error response
+      linkTo: (project) ->
+        projectId = project.$el.id.match(/project_(\d+)/)[1]
+        document.location = "/projects/#{projectId}/progress"
       submit: (e) ->
         try
           e.preventDefault()
@@ -20,7 +32,7 @@ $ ->
           .done (response) =>
             toastr.success('', response.message)
             @project.name = ''
-            window.dashboard.$.projectList.load() if window.dashboard.$.projectList
+            @load()
           .fail (response) =>
             json = response.responseJSON
             toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })

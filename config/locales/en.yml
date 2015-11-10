@@ -217,6 +217,8 @@ en:
     models:
       user: user
       project: project
+      member: member
+      iteration: iteration
       feature: feature
     attributes:
       user:

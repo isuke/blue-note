@@ -1,0 +1,27 @@
+.project_settings {
+  /*** variables **************************************************************/
+  $project-settings-bg-color:        $white-bg-color;
+  $project-settings-bg-accent-color: $white-bg-darken-color;
+  /****************************************************************************/
+
+  @include row;
+  background-color: $project-settings-bg-color;
+
+  .project_settings__left {
+    @include span-columns(5 of 10);
+    @include pad($small-spacing);
+  }
+
+  .project_settings__right {
+    @include span-columns(5 of 10);
+    @include pad($small-spacing);
+  }
+
+  .project_settings__members {
+    background-color: $project-settings-bg-color;
+
+    .project_settings__members__title {
+      @include padding($base-spacing $small-spacing $base-spacing $small-spacing);
+    }
+  }
+}

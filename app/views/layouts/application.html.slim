@@ -11,7 +11,7 @@ html
 
     .outer_container
       .outer_container__left
-        == render partial: 'shared/sidemenu'
+        == yield :sidemenu
 
       .outer_container__right
         == yield

@@ -1,0 +1,19 @@
+= javascript_include_tag 'view_models/project_settings'
+
+- provide(:title    , 'Settings')
+- provide(:sub_title, @project.name)
+
+- content_for :sidemenu do
+  - content_for :sidemenu_settings do
+    | Settings
+  == render partial: 'shared/project_sidemenu', locals: { project: @project }
+
+
+#project_settings.project_settings
+  = hidden_field_tag :user_id   , @current_user.id   , 'v-model': 'userId'
+  = hidden_field_tag :project_id, params[:project_id], 'v-model': 'projectId'
+
+  .project_settings__left
+    == render partial: 'pages/project_settings__members'
+
+  .project_settings__right

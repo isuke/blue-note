@@ -1,0 +1,20 @@
+script type='text/x-template' id='members_settings'
+  .members_settings
+    .members_settings__member_list
+      ul
+        li [
+          v-repeat = "memberList | orderBy 'role_value'"
+          id       = "member_{{id}}"
+          class    = "members_settings__member_list__item"
+          track-by = "id"
+        ]
+          .members_settings__member_list__item--user_role  v-text="role"
+          .members_settings__member_list__item--user_name  v-text="user_name"
+          .members_settings__member_list__item--user_email v-text="user_email"
+
+    .members_settings__member_new
+      = form_tag api_project_members_path do
+        = text_field_tag :user_email, nil, 'v-model': 'member.email', class: 'members_settings__member_new__item--email' , placeholder: 'email'
+        = select_tag     :role , options_for_select(Member.role.options), 'v-model': 'member.role', class: 'members_settings__member_new__item--role'
+        = submit_tag 'Add member', 'v-on': 'click : submit', class: 'members_settings__member_new__item--submit', id: 'feature_show_submit'
+
