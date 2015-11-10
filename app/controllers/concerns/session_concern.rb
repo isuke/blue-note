@@ -28,7 +28,7 @@ module SessionConcern
   def require_login
     return if current_user
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_path, error: 'unauthorized' }
       format.json { render(json: { message: 'unauthorized' }, status: :unauthorized) }
     end
   end

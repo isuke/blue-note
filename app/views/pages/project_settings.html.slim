@@ -10,8 +10,9 @@
 
 
 #project_settings.project_settings
-  = hidden_field_tag :user_id   , @current_user.id   , 'v-model': 'userId'
-  = hidden_field_tag :project_id, params[:project_id], 'v-model': 'projectId'
+  = hidden_field_tag :user_id   , @current_user.id, 'v-model': 'userId'
+  = hidden_field_tag :project_id, @project.id     , 'v-model': 'projectId'
+  = hidden_field_tag :role      , @current_user.role_in(@project), 'v-model': 'role'
 
   .project_settings__left
     == render partial: 'pages/project_settings__members'

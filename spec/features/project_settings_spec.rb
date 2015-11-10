@@ -4,6 +4,7 @@ RSpec.feature 'Project Settings Page', js: true do
   given!(:project) { create(:project) }
   given!(:user) { create(:user, name: 'Alice', email: 'alice@example.com', password: 'foobar') }
   background { login user, with_capybara: true }
+  background { user.join!(project) }
   background { visit project_settings_path(project) }
 
   subject { page }
@@ -26,18 +27,35 @@ RSpec.feature 'Project Settings Page', js: true do
       end
     end
 
-    scenario 'create new member when click add member button' do
-      fill_in 'user_email', with: 'bob@example.com'
-      select 'Admin', from: 'role'
-      click_button 'Add member'
+    context 'when user role is admin' do
+      background do
+        member = user.member_of(project)
+        member.role = :admin
+        member.save!
+      end
+      background { visit project_settings_path(project) }
 
-      wait_for_ajax
-      sleep 0.5
+      scenario 'create new member when click add member button' do
+        fill_in 'user_email', with: 'bob@example.com'
+        select 'Admin', from: 'role'
+        click_button 'Add member'
 
-      member = other_user.member_of(project)
-      expect(find("#member_#{member.id}")).to have_content 'admin'
-      expect(find("#member_#{member.id}")).to have_content other_user.name
-      expect(find("#member_#{member.id}")).to have_content other_user.email
+        wait_for_ajax
+        sleep 0.5
+
+        member = other_user.member_of(project)
+        expect(find("#member_#{member.id}")).to have_content 'admin'
+        expect(find("#member_#{member.id}")).to have_content other_user.name
+        expect(find("#member_#{member.id}")).to have_content other_user.email
+      end
+    end
+
+    context 'when user role is not admin' do
+      background { visit project_settings_path(project) }
+
+      scenario 'not exists add member form' do
+        expect(page).to_not have_button 'Add member'
+      end
     end
   end
 end

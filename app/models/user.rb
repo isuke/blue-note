@@ -44,4 +44,8 @@ class User < ActiveRecord::Base
   def member_of(project)
     members.find_by(project: project)
   end
+
+  def role_in(project)
+    member_of(project).role
+  end
 end

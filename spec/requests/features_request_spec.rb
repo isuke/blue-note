@@ -5,6 +5,7 @@ RSpec.describe 'features request' do
   let!(:project) { create(:project) }
 
   before { login(user) }
+  before { user.join!(project) }
 
   describe 'GET /api/projects/:project_id/features' do
     let!(:feature1) { create(:feature, project: project) }

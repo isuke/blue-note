@@ -1,8 +1,10 @@
 class Api::FeaturesController < Api::ApiController
+  include MemberAuthorizeConcern
   include FeaturesControllerEachModelsUpdate
 
   before_action :set_project, only: [:index, :create, :update_all, :destroy_all]
   before_action :set_feature, only: [:show, :update, :update_priority]
+  before_action -> { member_authorize @project }, only: [:index, :create, :update_all, :destroy_all]
 
   def index
     @features = @project.features.includes(:iteration)

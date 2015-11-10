@@ -1,5 +1,8 @@
 class Api::IterationsController < Api::ApiController
+  include MemberAuthorizeConcern
+
   before_action :set_project, only: [:index]
+  before_action -> { member_authorize @project }, only: [:index]
 
   def index
     @iterations = @project.iterations
