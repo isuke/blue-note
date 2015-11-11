@@ -5,10 +5,10 @@ describe 'filterable', ->
   describe '#filter', ->
     it 'should have a filter function', ->
       expect(typeof filterable.methods.filter).toBe('function')
-    describe 'when enum query', ->
-      it 'should filter list by enum', ->
+    describe 'when eq query', ->
+      it 'should filter list by eq', ->
         query = {item: ['todo', 'doing']}
-        schema = {item: 'enum'}
+        schema = {item: 'eq'}
         list = [
           {item: 'todo' , other: 'hoge'},
           {item: 'doing', other: 'hoge'},
