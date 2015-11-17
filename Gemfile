@@ -18,7 +18,7 @@ gem 'neat'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
-  gem 'rails-assets-vue'
+  gem 'rails-assets-vue', '~> 0.12'
   gem 'rails-assets-page'
   gem 'rails-assets-toastr'
   gem 'rails-assets-Sortable'

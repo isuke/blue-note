@@ -1,9 +1,17 @@
 .feature_list__menu
   ul.feature_list__menu__filter
-    li.feature_list__menu__item = button_tag 'status', class: 'feature_list__menu__item__btn'
-    li.feature_list__menu__item = button_tag 'point' , class: 'feature_list__menu__item__btn'
-    li.feature_list__menu__item = button_tag 'title' , class: 'feature_list__menu__item__btn'
+    li.feature_list__menu__item = label_tag 'Filter', nil, class: 'feature_list__menu__item__lbl'
+    li.feature_list__menu__item.droodown
+      = button_tag 'status', class: 'feature_list__menu__item__btn dropdown__btn'
+      ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
+        - Feature.status.values.each do |status|
+          li.feature_list__menu__dropdown_list__item
+            = check_box_tag "filter_status_#{status}", status, false, 'v-model': "filterStatus.#{status}"
+            = label_tag "filter_status_#{status}", status
+    / li.feature_list__menu__item = button_tag 'point' , class: 'feature_list__menu__item__btn'
+    / li.feature_list__menu__item = button_tag 'title' , class: 'feature_list__menu__item__btn'
   ul.feature_list__menu__action
+    li.feature_list__menu__item = label_tag 'Action', nil, class: 'feature_list__menu__item__lbl'
     li.feature_list__menu__item
       = button_tag 'refresh', class: 'feature_list__menu__item__btn', 'v-on': 'click: load()'
 
@@ -15,6 +23,6 @@
       ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
         - Feature.status.values.each do |status|
           li.feature_list__menu__dropdown_list__item
-            = radio_button_tag 'status', status, false, 'v-model': 'status'
-            = label_tag "status_#{status}", status
+            = radio_button_tag 'action_status', status, false, 'v-model': 'status'
+            = label_tag "action_status_#{status}", status
         = button_tag 'update', 'v-on': 'click: updateStatus()'

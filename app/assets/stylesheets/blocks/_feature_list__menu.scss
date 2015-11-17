@@ -13,23 +13,51 @@
     .feature_list__menu__item__btn {
       background: $white;
       padding: 0.5em 1em;
-      background: $white;
       color: $action-color;
-      border: $base-border;
-      border-right: none;
+      border: $base-border;;
+      border-left: none;
+      border-radius: 0;
+
+      &:hover {
+        background: $theme-bg-color;
+        color: $white;
+      }
+    }
+    .feature_list__menu__item__lbl {
+      @include appearance(none);
+      -webkit-font-smoothing: antialiased;
+      display: inline-block;
+      line-height: 1;
+      vertical-align: middle;
+      margin: 0;
+
+      background: $white-bg-darken-color;
+      padding: 0.5em 1em;
+      border: $base-border;;
+      border-left: none;
       border-radius: 0;
     }
   }
-  .feature_list__menu__item:first-child > .feature_list__menu__item__btn {
+
+  .feature_list__menu__item:first-child > .feature_list__menu__item__btn,
+  .feature_list__menu__item:first-child > .feature_list__menu__item__lbl {
     @include border-left-radius($base-border-radius);
-  }
-  .feature_list__menu__item:last-child > .feature_list__menu__item__btn {
-    @include border-right-radius($base-border-radius);
+    border-left: $base-border;
     border-right: $base-border;
+
+  }
+  .feature_list__menu__item:last-child > .feature_list__menu__item__btn,
+  .feature_list__menu__item:last-child > .feature_list__menu__item__lbl {
+    @include border-right-radius($base-border-radius);
   }
 
   .feature_list__menu__dropdown_list {
     padding: $small-spacing;
     background: $white;
+    min-width: 100px;
+
+    .feature_list__menu__dropdown_list__item > * {
+      display: inline-block;
+    }
   }
 }
