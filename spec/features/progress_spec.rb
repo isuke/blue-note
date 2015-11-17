@@ -52,6 +52,22 @@ RSpec.feature 'Progress Page', js: true do
       end
     end
 
+    scenario 'filtering list when filter status checked' do
+      find('.feature_list__menu__filter').find('.feature_list__menu__item__btn').click
+      uncheck 'filter_status_todo'
+      check   'filter_status_doing'
+      check   'filter_status_done'
+
+      aggregate_failures 'filter to status' do
+        project.features.with_status(:doing, :done).each do |feature|
+          expect(page).to have_content feature.title
+        end
+        project.features.with_status(:todo).each do |feature|
+          expect(page).not_to have_content feature.title
+        end
+      end
+    end
+
     scenario 'show feature show view when click feature title' do
       feature = features.first
 

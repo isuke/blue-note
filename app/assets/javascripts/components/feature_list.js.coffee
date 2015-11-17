@@ -5,12 +5,16 @@ $ ->
     inherit: true
     data: ->
       featureList: []
-      queryStr: 'status:todo,doing'
+      query: { status: ['todo', 'doing'] }
+      filterStatus:
+        todo:  true
+        doing: true
+        done:  false
       schema:
         priority: 'int'
         title:    'like'
         point:    'int'
-        status:   'enum'
+        status:   'eq'
       status: undefined
     compiled: ->
       @load()
@@ -37,6 +41,13 @@ $ ->
         @filter @featureList
       selectedFeatureList: ->
         _.filter @filteredFeatureList, (feature) -> feature.selected
+    watch:
+      filterStatus:
+        handler: ->
+          temp = []
+          $.each @filterStatus, (k, v) -> temp.push(k) if v
+          @query.status = temp
+        deep: true
     methods:
       load: ->
         $.ajax "/api/projects/#{@projectId}/features.json"
