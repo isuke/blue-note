@@ -3,8 +3,11 @@
 
   component [
     is              = "membersSettings"
-    v-ref           = "membersSettings"
+    v-ref:members-settings
     keep-alive      = true
+    :user-id        = "userId"
+    :project-id     = "projectId"
+    :role           = "role"
   ]
   == render 'shared/members_settings'
 

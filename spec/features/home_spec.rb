@@ -19,7 +19,7 @@ RSpec.feature 'Home Page', js: true do
     find('.sign_up_modal').fill_in 'email'                 , with: 'bob@example.com'
     find('.sign_up_modal').fill_in 'password'              , with: 'password'
     find('.sign_up_modal').fill_in 'password_confirmation' , with: 'password'
-    find('.sign_up_modal').click_on 'Sign Up'
+    find('.sign_up_modal').find_button('Sign Up').trigger('click')
 
     wait_for_ajax
     sleep 0.5

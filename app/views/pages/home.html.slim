@@ -4,11 +4,11 @@
   h1.home__title Blue Note
   p is agile project management tool...
   - unless logged_in?
-    = button_tag 'Sign Up', 'v-on': 'click: showSignUpModal', class: 'home__sign_up_btn'
+    = button_tag 'Sign Up', 'v-on:click': 'showSignUpModal', class: 'home__sign_up_btn'
 
   component [
-    is         = "signUpModal"
-    v-ref      = "signUpModal"
+    is = "signUpModal"
+    v-ref:signUpModa
     keep-alive = true
   ]
 

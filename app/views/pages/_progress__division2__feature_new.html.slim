@@ -1,7 +1,11 @@
 .progress__division2__feature_new
   component [
-    is              = "{{division2View}}"
-    v-ref           = "division2View"
+    :is             = "division2View"
+    :user-id        = "userId"
+    :project-id     = "projectId"
+    :dispatcher     = "dispatcher"
+    :channel        = "channel"
+    v-ref:division2View
     keep-alive      = true
   ]
   == render 'shared/feature_new'

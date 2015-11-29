@@ -5,7 +5,7 @@ $ ->
       showProjectMenu: false
       showUserMenu: false
     methods:
-      showLoginModal: -> @$.loginModal.show()
+      showLoginModal: -> @$refs.loginModal.show()
       logout: ->
         $.ajax
           url: '/api/logout.json'

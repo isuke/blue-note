@@ -1,7 +1,7 @@
 $ ->
   Vue.component 'featureShow',
     template: '#feature_show'
-    inherit: true
+    props: ['userId', 'projectId', 'dispatcher', 'channel']
     data: ->
       featureId: undefined
       feature: { title: "", point: "", status: "", updated_at: "" }

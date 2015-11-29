@@ -1,14 +1,14 @@
 $ ->
   Vue.component 'membersSettings',
     template: '#members_settings'
-    inherit: true
+    props: ['userId', 'projectId', 'role']
     data: ->
       member:
         email: ''
         role:  'general'
       memberList: []
-    compiled: ->
-      @load()
+    watch:
+      projectId: -> @load()
     methods:
       load: ->
         $.ajax "/api/projects/#{@projectId}/members.json"
@@ -17,13 +17,13 @@ $ ->
           .fail (response) =>
             console.error response
       submit: (e) ->
-        try
           e.preventDefault()
           submit = $('.members_settings__member_new__submit')
           submit.prop('disabled', true)
           $.ajax
             url: "/api/projects/#{@projectId}/members.json"
             type: 'POST'
+            timeout: 10000
             data:
               member:
                 email: @member.email
@@ -35,5 +35,5 @@ $ ->
           .fail (response) =>
             json = response.responseJSON
             toastr.error(json.full_messages, json.message, { timeOut: 0 })
-        finally
-          submit.prop('disabled', false)
+          .always () =>
+            submit.prop('disabled', false)

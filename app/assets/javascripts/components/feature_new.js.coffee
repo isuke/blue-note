@@ -1,7 +1,7 @@
 $ ->
   Vue.component 'featureNew',
     template: '#feature_new'
-    inherit: true
+    props: ['userId', 'projectId', 'dispatcher', 'channel']
     data: ->
       feature:
         title: ''

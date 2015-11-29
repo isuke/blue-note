@@ -16,7 +16,11 @@ RSpec.feature 'Progress Page', js: true do
   end
   background { login user, with_capybara: true }
   background { user.join!(project) }
-  background { visit progress_path(project) }
+  background do
+    visit progress_path(project)
+    wait_for_ajax
+    sleep 0.5
+  end
 
   subject { page }
 
@@ -108,7 +112,6 @@ RSpec.feature 'Progress Page', js: true do
   feature 'feature show' do
     let(:feature) { features.first }
     background do
-      fill_in :feature_list_queue_str, with: ''
       find("#feature_#{feature.id}").find('.feature_list__items__contents__item__title').click
 
       wait_for_ajax
@@ -124,14 +127,12 @@ RSpec.feature 'Progress Page', js: true do
       expect(page).to have_button 'Edit'
     end
 
-    scenario 'back to feature list when click back button' do
+    scenario 'back to new feature when click back button' do
       click_button 'Back'
 
       sleep 0.5
 
-      project.features.each do |feature|
-        expect(page).to have_content feature.title
-      end
+      expect(page).to have_css '.feature_new'
     end
 
     scenario 'show feature eidt when click edit button' do

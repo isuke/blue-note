@@ -13,16 +13,16 @@ $ ->
       @channel = @dispatcher.subscribe("project_#{@projectId}")
 
       @channel.bind 'features.got', (data) =>
-        @$.division3View.addOrUpdateFeatures(data) if @$.division3View.addOrUpdateFeatures
+        @.$broadcast('addOrUpdateFeatures', data)
 
       @channel.bind 'features.deleted', (data) =>
-        @$.division3View.removeFeature(data) if @$.division3View.removeFeature
+        @.$broadcast('removeFeature', data)
 
   page hashbang: true, dispatch: false
   page 'featureNew', (ctx) ->
     progress.division2View = 'featureNew'
   page 'featureShow/:id', (ctx) ->
     progress.division2View = 'featureShow'
-    Vue.nextTick ->
-      progress.$.division2View.editMode = false
-      progress.$.division2View.featureId = ctx.params.id
+    Vue.nextTick =>
+      progress.$refs.division2view.editMode = false
+      progress.$refs.division2view.featureId = ctx.params.id

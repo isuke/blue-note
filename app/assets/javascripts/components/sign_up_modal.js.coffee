@@ -10,13 +10,13 @@ $ ->
         passwordConfirmation: ''
     methods:
       submit: (e)->
-        try
           e.preventDefault()
           submit = $('#sign_up_modal_submit')
           submit.prop('disabled', true)
           $.ajax
             url: "/api/sign_up.json"
             type: 'POST'
+            timeout: 10000
             data:
               user:
                 name: @user.name
@@ -29,5 +29,5 @@ $ ->
           .fail (response) =>
             json = response.responseJSON
             toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })
-        finally
-          submit.prop('disabled', false)
+          .always () =>
+            submit.prop('disabled', false)
