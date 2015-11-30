@@ -2,22 +2,17 @@ $ ->
   Vue.component 'featureList',
     template: '#feature_list'
     mixins: [Vue.modules.filterable]
-    inherit: true
+    props: ['userId', 'projectId', 'dispatcher', 'channel']
     data: ->
       featureList: []
       query: { status: ['todo', 'doing'] }
-      filterStatus:
-        todo:  true
-        doing: true
-        done:  false
+      filterStatus: ['todo', 'doing']
       schema:
         priority: 'int'
         title:    'like'
         point:    'int'
         status:   'eq'
       status: undefined
-    compiled: ->
-      @load()
     ready: ->
       new Sortable document.getElementById('feature_list__items--exists_priority'),
         group:
@@ -42,19 +37,30 @@ $ ->
       selectedFeatureList: ->
         _.filter @filteredFeatureList, (feature) -> feature.selected
     watch:
-      filterStatus:
-        handler: ->
-          temp = []
-          $.each @filterStatus, (k, v) -> temp.push(k) if v
-          @query.status = temp
-        deep: true
+      projectId: -> @load()
+      filterStatus: (val) ->
+        @query.status = val
+      query: (val) ->
+        @filterStatus = val.status
+    events:
+      addOrUpdateFeatures: (data) ->
+        $.each data.features, (index, feature) =>
+          if _.findKey @featureList, {id: feature.id}
+            @updateFeature data.user, feature, data.show_message
+          else
+            @addFeature data.user, feature, data.show_message
+      removeFeature: (data, show_message = true) ->
+        if show_message && data.user.id.toString() != @userId
+          toastr.info('', "#{data.user.name}: deleted feature", { timeOut: 0 })
+        @featureList = _.reject @featureList, (feature) ->
+          _.includes data.ids, feature.id.toString()
     methods:
       load: ->
         $.ajax "/api/projects/#{@projectId}/features.json"
           .done (response) =>
+            $.each response, (i, feature) =>
+              feature.selected = false
             @featureList = response
-            $.each @featureList, (i, feature) ->
-              feature.$add('selected', false)
           .fail (response) =>
             console.error response
       deleteAll: ->
@@ -89,32 +95,21 @@ $ ->
         .fail (response) =>
           json = response.responseJSON
           toastr.error('', json.message, { timeOut: 0 })
-      addOrUpdateFeatures: (data) ->
-        $.each data.features, (index, feature) =>
-          if _.findKey @featureList, {id: feature.id}
-            @updateFeature data.user, feature, data.show_message
-          else
-            @addFeature data.user, feature, data.show_message
       addFeature: (user, feature, show_message = true) ->
         if show_message && user.id.toString() != @userId
           toastr.info('', "#{user.name}: created #{feature.title}", { timeOut: 0 })
         newFeature = feature
-        newFeature.$add('selected', false)
+        newFeature.selected = false
         @featureList.push(newFeature)
       updateFeature: (user, feature, show_message = true) ->
         if show_message && user.id.toString() != @userId
           toastr.info('', "#{user.name}: updated #{feature.title}", { timeOut: 0 })
         index = _.findIndex @featureList, {id: feature.id}
-        feature.$add('selected', @featureList[index].selected)
+        updateFeature = feature
+        updateFeature.selected = @featureList[index].selected
         @featureList.$set index, feature
-      removeFeature: (data, show_message = true) ->
-        if show_message && data.user.id.toString() != @userId
-          toastr.info('', "#{data.user.name}: deleted feature", { timeOut: 0 })
-        @featureList = _.reject @featureList, (feature) ->
-          _.includes data.ids, feature.id.toString()
       show: (feature) ->
-        featureId = feature.$el.id.match(/feature_(\d+)/)[1]
-        page "featureShow/#{featureId}"
+        page "featureShow/#{feature.id}"
       sort: (evt, remove) ->
         featureId = evt.item.id.match(/feature_(\d+)/)[1]
 

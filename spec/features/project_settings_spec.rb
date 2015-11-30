@@ -5,7 +5,11 @@ RSpec.feature 'Project Settings Page', js: true do
   given!(:user) { create(:user, name: 'Alice', email: 'alice@example.com', password: 'foobar') }
   background { login user, with_capybara: true }
   background { user.join!(project) }
-  background { visit project_settings_path(project) }
+  background do
+    visit project_settings_path(project)
+    wait_for_ajax
+    sleep 0.5
+  end
 
   subject { page }
 
@@ -33,7 +37,14 @@ RSpec.feature 'Project Settings Page', js: true do
         member.role = :admin
         member.save!
       end
-      background { visit project_settings_path(project) }
+      background do
+        # TODO: raise following error often.
+        #   Capybara::Poltergeist::DeadClient:
+        #   PhantomJS client died while processing {"name":"visit","args":["http://127.0.0.1:61022/projects/574/project_settings"]}
+        page.driver.browser.clear_network_traffic
+
+        visit project_settings_path(project)
+      end
 
       scenario 'create new member when click add member button' do
         fill_in 'user_email', with: 'bob@example.com'

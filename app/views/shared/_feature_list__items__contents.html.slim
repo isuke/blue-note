@@ -1,10 +1,10 @@
 .feature_list__items__contents
   .feature_list__items__contents__item__division1
-    input type="checkbox" id="feature_{{id}}_selected_check" v-model="selected"
+    input type="checkbox" id="feature_{{feature.id}}_selected_check" v-model="feature.selected"
   .feature_list__items__contents__item__division2
-    .feature_list__items__contents__item__priority    v-text="priority"
+    .feature_list__items__contents__item__priority    v-text="feature.priority"
   .feature_list__items__contents__item__division3
-    .feature_list__items__contents__item__status      v-text="status" class="{{'label--'+status}}"
-    .feature_list__items__contents__item__point.badge v-text="point == null ? '-' : point"
+    .feature_list__items__contents__item__status      v-text="feature.status" class="{{'label--'+feature.status}}"
+    .feature_list__items__contents__item__point.badge v-text="feature.point == null ? '-' : feature.point"
   .feature_list__items__contents__item__division4
-    .feature_list__items__contents__item__title v-text="title" v-on="click: show(this)"
+    .feature_list__items__contents__item__title v-text="feature.title" v-on:click="show(feature)"

@@ -1,7 +1,11 @@
 .progress__division3__feature_list
   component [
-    is              = "{{division3View}}"
-    v-ref           = "division3View"
+    :is             = "division3View"
+    :user-id        = "userId"
+    :project-id     = "projectId"
+    :dispatcher     = "dispatcher"
+    :channel        = "channel"
+    v-ref:division3View
     keep-alive      = true
   ]
   == render 'shared/feature_list'

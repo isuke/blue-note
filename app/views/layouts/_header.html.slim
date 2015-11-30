@@ -24,14 +24,14 @@
             span.header__btn.dropdown__btn
               = @current_user.name
             ul.header__dropdown_list.dropdown__content
-              li.header__dropdown_list__item = link_to 'Logout', '#', 'v-on': 'click: logout'
+              li.header__dropdown_list__item = link_to 'Logout', '#', 'v-on:click': 'logout'
         - else
           li.header__list__item
-            = link_to 'Login', '#', 'v-on': 'click: showLoginModal', class: 'header__btn'
+            = link_to 'Login', '#', 'v-on:click': 'showLoginModal', class: 'header__btn'
 
   component [
-    is         = "loginModal"
-    v-ref      = "loginModal"
+    is = "loginModal"
+    v-ref:login-modal
     keep-alive = true
   ]
 

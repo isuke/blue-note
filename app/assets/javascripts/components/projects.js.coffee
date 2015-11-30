@@ -1,7 +1,7 @@
 $ ->
   Vue.component 'projects',
     template: '#projects'
-    inherit: true
+    props: ['currentUserId']
     data: ->
       projectList: []
       project:
@@ -16,25 +16,24 @@ $ ->
           .fail (response) =>
             console.error response
       linkTo: (project) ->
-        projectId = project.$el.id.match(/project_(\d+)/)[1]
-        document.location = "/projects/#{projectId}/progress"
+        document.location = "/projects/#{project.id}/progress"
       submit: (e) ->
-        try
-          e.preventDefault()
-          submit = $('.project_new__submit')
-          submit.prop('disabled', true)
-          $.ajax
-            url: '/api/projects.json'
-            type: 'POST'
-            data:
-              project:
-                name: @project.name
-          .done (response) =>
-            toastr.success('', response.message)
-            @project.name = ''
-            @load()
-          .fail (response) =>
-            json = response.responseJSON
-            toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })
-        finally
+        e.preventDefault()
+        submit = $('.project_new__submit')
+        submit.prop('disabled', true)
+        $.ajax
+          url: '/api/projects.json'
+          type: 'POST'
+          timeout: 10000
+          data:
+            project:
+              name: @project.name
+        .done (response) =>
+          toastr.success('', response.message)
+          @project.name = ''
+          @load()
+        .fail (response) =>
+          json = response.responseJSON
+          toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })
+        .always () =>
           submit.prop('disabled', false)

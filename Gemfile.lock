@@ -183,7 +183,7 @@ GEM
     rails-assets-toastr (2.1.1)
       rails-assets-jquery (>= 1.6.3)
     rails-assets-underscore (1.8.3)
-    rails-assets-vue (0.12.16)
+    rails-assets-vue (1.0.10)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.6)
@@ -347,7 +347,7 @@ DEPENDENCIES
   rails-assets-page!
   rails-assets-toastr!
   rails-assets-underscore!
-  rails-assets-vue (~> 0.12)!
+  rails-assets-vue (~> 1.0)!
   rails-erd
   rspec-its
   rspec-rails

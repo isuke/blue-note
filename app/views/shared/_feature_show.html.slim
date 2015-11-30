@@ -6,8 +6,8 @@ script type='text/x-template' id='feature_show'
       .feature_show__view__item--status     v-text="feature.status"
       .feature_show__view__item--updated-at v-text="feature.updated_at"
       .feature_show__view__buttons
-        = button_tag 'Back', 'v-on': 'click : back'          , class: 'feature_show__button--back'
-        = button_tag 'Edit', 'v-on': 'click : toggleEditMode', class: 'feature_show__button--edit'
+        = button_tag 'Back', 'v-on:click': 'back'          , class: 'feature_show__button--back'
+        = button_tag 'Edit', 'v-on:click': 'toggleEditMode', class: 'feature_show__button--edit'
 
     .feature_show__edit v-if="editMode"
       = form_tag api_project_features_path do
@@ -15,6 +15,6 @@ script type='text/x-template' id='feature_show'
         = number_field_tag :point , nil, 'v-model': 'featureEdit.point', class: 'feature_show__edit__item--point' , placeholder: 'point', step: 1, min: 0
         = select_tag       :status, options_for_select(Feature.status.options), 'v-model': 'featureEdit.status', class: 'feature_show__edit__item--point'
         .feature_show__edit__buttons
-          = button_tag 'Back'          , 'v-on': 'click : back'          , class: 'feature_show__button--back'
-          = button_tag 'Cancel'        , 'v-on': 'click : toggleEditMode', class: 'feature_show__button--cancel'
-          = submit_tag 'Update feature', 'v-on': 'click : submit'        , class: 'feature_show__button--submit', id: 'feature_show_submit'
+          = button_tag 'Back'          , 'v-on:click': 'back'          , class: 'feature_show__button--back'
+          = button_tag 'Cancel'        , 'v-on:click': 'toggleEditMode', class: 'feature_show__button--cancel'
+          = submit_tag 'Update feature', 'v-on:click': 'submit'        , class: 'feature_show__button--submit', id: 'feature_show_submit'
