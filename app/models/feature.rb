@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20151106021524
+# Schema version: 20151207045952
 #
 # Table name: features
 #
@@ -7,7 +7,7 @@
 #  project_id   :integer          not null
 #  title        :string           not null
 #  status       :integer          not null
-#  priority     :integer
+#  priority     :integer          not null
 #  point        :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -26,7 +26,7 @@ class Feature < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :iteration
-  acts_as_list scope: :project, column: :priority, top_of_list: 1, add_new_at: nil
+  acts_as_list scope: :project, column: :priority, top_of_list: 1, add_new_at: :bottom
 
   enumerize :status, in: { todo: 10, doing: 20, done: 30 }, default: :todo, scope: true
 

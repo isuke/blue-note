@@ -35,12 +35,13 @@ describe 'filterable', ->
         expect(filterable.methods.filter(list, query, schema)).toEqual expected_result
     describe 'when int query', ->
       it 'should filter list by int', ->
-        query = {item: [['=', 0]]}
+        query = {item: ['=0']}
         schema = {item: 'int'}
         list = [
-          {item: 0 , other: 1},
-          {item: 1 , other: 0},
-          {item: 2 , other: 0},
+          {item: 0    , other: 1},
+          {item: 1    , other: 0},
+          {item: 2    , other: 0},
+          {item: null , other: 0},
         ]
         expected_result = [
           {item: 0 , other: 1}

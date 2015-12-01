@@ -149,23 +149,6 @@ RSpec.describe 'features request' do
         expect(feature.priority).to eq 2
       end
     end
-
-    context 'with nil param' do
-      let(:params) { { insert_at: nil } }
-
-      it 'return success code and message' do
-        patch path, params
-
-        expect(response).to be_success
-        expect(response.status).to eq 201
-
-        expect(json['message']).to eq 'feature was successfully updated.'
-
-        feature.reload
-
-        expect(feature.priority).to eq nil
-      end
-    end
   end
 
   describe 'PATCH /api/projects/:project_id/features/update_all' do

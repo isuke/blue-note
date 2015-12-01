@@ -22,6 +22,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-page'
   gem 'rails-assets-toastr'
   gem 'rails-assets-Sortable'
+  gem 'rails-assets-d3'
 end
 
 group :development do

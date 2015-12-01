@@ -1,20 +1,19 @@
 .feature_list__items
-  ul.feature_list__items__outer#feature_list__items--exists_priority
+  .feature_list__items__iteration
+  ul.feature_list__items__list#feature_list__items__list
     li [
-      v-for    = "feature in filteredFeatureList | only 'exists' in 'priority' | orderBy 'priority'"
+      v-for    = "feature in filteredFeatureList | orderBy 'priority'"
       id       = "feature_{{feature.id}}"
-      class    = "{{feature.selected ? 'feature_list__items__item--selected' : 'feature_list__items__item'}}"
+      class    = "{{feature.selected ? 'feature_list__items__list__item--selected' : 'feature_list__items__list__item'}}"
       track-by = "id"
     ]
-      == render 'shared/feature_list__items__contents'
+      .feature_list__items__list__item__division1
+        input type="checkbox" id="feature_{{feature.id}}_selected_check" v-model="feature.selected"
+      .feature_list__items__list__item__division2
+        .feature_list__items__list__item__priority    v-text="feature.priority"
+      .feature_list__items__list__item__division3
+        .feature_list__items__list__item__status      v-text="feature.status" class="{{'label--'+feature.status}}"
+        .feature_list__items__list__item__point.badge v-text="feature.point == null ? '-' : feature.point"
+      .feature_list__items__list__item__division4
+        .feature_list__items__list__item__title v-text="feature.title" v-on:click="show(feature)"
 
-  hr.feature_list__items__separator
-
-  ul.feature_list__items__outer#feature_list__items--not_exists_priority
-    li [
-      v-for    = "feature in filteredFeatureList | only 'not exists' in 'priority' | orderBy 'updatedBy'"
-      id       = "feature_{{feature.id}}"
-      class    = "{{feature.selected ? 'feature_list__items__item--selected' : 'feature_list__items__item'}}"
-      track-by = "id"
-    ]
-      == render 'shared/feature_list__items__contents'

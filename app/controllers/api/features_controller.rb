@@ -49,6 +49,6 @@ private
   end
 
   def features_params
-    params.require(:features).map { |u| u.permit(:id, :title, :point, :status) }
+    params.require(:features).map { |u| u.permit(:id, :title, :point, :status, :iteration_id) }
   end
 end

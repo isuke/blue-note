@@ -4,11 +4,7 @@ module FeaturesControllerEachModelsUpdate
   def update_priority
     old_priority = @feature.priority
     new_priority = params[:insert_at].try(:to_i)
-    if new_priority.nil?
-      update_priority_remove_from_list(old_priority)
-    else
-      update_priority_insert_at_list(old_priority, new_priority)
-    end
+    update_priority_insert_at_list(old_priority, new_priority)
   end
 
   def update_all
@@ -70,7 +66,7 @@ private
 
   def update_priority_insert_at_list(old_priority, new_priority)
     if @feature.insert_at(new_priority)
-      condition = (old_priority.nil? || old_priority > new_priority) ? 'priority >= ?' : 'priority <= ?'
+      condition = (old_priority > new_priority) ? 'priority >= ?' : 'priority <= ?'
       updated_ids = @feature.project.features.where(condition, new_priority).pluck(:id)
       render(
         json: { ids: updated_ids, message: I18n.t('action.update.success', model: I18n.t('activerecord.models.feature')) },

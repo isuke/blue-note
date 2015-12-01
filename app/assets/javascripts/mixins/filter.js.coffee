@@ -29,9 +29,9 @@ Vue.modules.filterable = {
               when 'eq'   then return item[k] == val
               when 'like' then return (new RegExp(val, 'i')).test item[k]
               when 'int'
-                sn = /(>=|>|<=|<|=)?([0-9]+)/.exec val
+                sn = /(>=|>|<=|<|=)?([0-9]*)/.exec val
                 sign = sn[1] || '='
-                v  = parseInt(sn[2], 10)
+                v  = if sn[2] != '' then parseInt(sn[2], 10) else null
                 switch sign
                   when '='  then return item[k] == v
                   when '>=' then return item[k] >= v
