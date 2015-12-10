@@ -178,6 +178,7 @@ GEM
       railties (= 4.2.2)
       sprockets-rails
     rails-assets-Sortable (1.4.2)
+    rails-assets-d3 (3.5.10)
     rails-assets-jquery (2.1.4)
     rails-assets-page (1.6.3)
     rails-assets-toastr (2.1.1)
@@ -344,6 +345,7 @@ DEPENDENCIES
   pry-rails
   rails (= 4.2.2)
   rails-assets-Sortable!
+  rails-assets-d3!
   rails-assets-page!
   rails-assets-toastr!
   rails-assets-underscore!

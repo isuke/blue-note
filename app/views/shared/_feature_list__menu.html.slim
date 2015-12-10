@@ -6,10 +6,9 @@
       ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
         - Feature.status.values.each do |status|
           li.feature_list__menu__dropdown_list__item
-            = check_box_tag "filter_status_#{status}", status, false, 'v-model': "filterStatus"
-            = label_tag "filter_status_#{status}", status
-    / li.feature_list__menu__item = button_tag 'point' , class: 'feature_list__menu__item__btn'
-    / li.feature_list__menu__item = button_tag 'title' , class: 'feature_list__menu__item__btn'
+            = check_box_tag "query_status_#{status}", status, false, 'v-model': "query.status"
+            = label_tag "query_status_#{status}", status
+
   ul.feature_list__menu__action
     li.feature_list__menu__item = label_tag 'Action', nil, class: 'feature_list__menu__item__lbl'
     li.feature_list__menu__item
@@ -23,6 +22,17 @@
       ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
         - Feature.status.values.each do |status|
           li.feature_list__menu__dropdown_list__item
-            = radio_button_tag 'action_status', status, false, 'v-model': 'status'
+            = radio_button_tag 'action_status', status, false, 'v-model': 'action.status'
             = label_tag "action_status_#{status}", status
         = button_tag 'update', 'v-on:click': 'updateStatus()'
+
+    li.feature_list__menu__item.droodown v-if="selectedFeatureList.length > 0"
+      = button_tag 'iteration', class: 'feature_list__menu__item__btn dropdown__btn'
+      ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
+        li.feature_list__menu__dropdown_list__item
+          input type="radio" name="action_iteration" id="action_iteration_none" value="" v-model="action.iteration"
+          label for="action_iteration_none" None
+        li.feature_list__menu__dropdown_list__item v-for="iteration in iterationList"
+          input type="radio" name="action_iteration" id="action_iteration_{{iteration.number}}" value="{{iteration.id}}" v-model="action.iteration"
+          label for="action_iteration_{{iteration.number}}" {{iteration.number}}
+        = button_tag 'update', 'v-on:click': 'updateIterations()'

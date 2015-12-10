@@ -2,8 +2,8 @@
   /*** variables **************************************************************/
   /****************************************************************************/
 
-  .feature_list__menu__filter { display: inline; }
-  .feature_list__menu__action { display: inline; padding-left: $small-spacing }
+  .feature_list__menu__filter { @include margin($small-spacing null $small-spacing null) }
+  .feature_list__menu__action { @include margin($small-spacing null $small-spacing null) }
 
   padding-bottom: $small-spacing;
 
@@ -14,7 +14,7 @@
       background: $white;
       padding: 0.5em 1em;
       color: $action-color;
-      border: $base-border;;
+      border: $base-border;
       border-left: none;
       border-radius: 0;
 
@@ -24,6 +24,8 @@
       }
     }
     .feature_list__menu__item__lbl {
+      width: 80px;
+      @include centering(horizontal);
       @include appearance(none);
       -webkit-font-smoothing: antialiased;
       display: inline-block;

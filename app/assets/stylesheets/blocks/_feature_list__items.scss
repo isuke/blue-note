@@ -1,67 +1,76 @@
 .feature_list .feature_list__items {
   /*** variables **************************************************************/
+  $feature_list__items_min_height: 150px;
   $feature_list__items_max_height: 400px;
   /****************************************************************************/
 
-  .feature_list__items__outer {
-    min-height: $base-spacing;
-    max-height: $feature_list__items_max_height;
-    overflow: scroll;
+  min-height: $feature_list__items_min_height;
+  max-height: $feature_list__items_max_height;
+  overflow: scroll;
+  @include row;
+
+  .feature_list__items__iteration {
+    @include span-columns(1 of 16);
+
+    .feature_list__items__iterations__item {
+      @include centering(horizontal);
+      padding-top: $small-spacing;
+      background-color: $theme-color;
+      color: $white;
+      border: $base-border;
+    }
   }
 
-  .feature_list__items__item {
-    @include row(table);
-    border-bottom: $base-border;
+  .feature_list__items__list {
+    @include span-columns(15 of 16);
 
-    cursor: move;
+    .feature_list__items__list__item {
 
-    @include transition(all .2s ease-out);
-    &:hover { background-color: $white-bg-darken-color; }
-    &:nth-child(1) { border-top: $base-border; }
+      @include row(table);
+      border-bottom: $base-border;
 
-    .feature_list__items__contents {
-      .feature_list__items__contents__item__division1 {
+      cursor: move;
+
+      @include transition(all .2s ease-out);
+      &:hover { background-color: $white-bg-darken-color; }
+      &:nth-child(1) { border-top: $base-border; }
+
+      .feature_list__items__list__item__division1 {
         @include centering(both);
-        @include span-columns(1 of 16);
+        @include span-columns(1 of 15);
         max-width: 50px;
-        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+        padding: $small-spacing;
       }
-      .feature_list__items__contents__item__division2 {
+      .feature_list__items__list__item__division2 {
         @include centering(both);
-        @include span-columns(1 of 16);
+        @include span-columns(1 of 15);
         max-width: 50px;
-        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+        padding: $small-spacing;
       }
-      .feature_list__items__contents__item__division3 {
-        @include span-columns(2 of 16);
+      .feature_list__items__list__item__division3 {
+        @include span-columns(2 of 15);
         max-width: 80px;
-        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+        padding: $small-spacing;
       }
-      .feature_list__items__contents__item__division4 {
-        @include span-columns(12 of 16);
-        @include padding($small-spacing $small-spacing $small-spacing $small-spacing);
+      .feature_list__items__list__item__division4 {
+        @include span-columns(11 of 15);
+        padding: $small-spacing;
       }
-      .feature_list__items__contents__item__title {
+      .feature_list__items__list__item__title {
         &:hover {
           text-decoration: underline;
           cursor: pointer;
         }
       }
     }
-  }
-
-  .feature_list__items__item--chosen {
-    @include transform(rotate(-2deg));
-  }
-  .feature_list__items__item--selected {
-    @extend .feature_list__items__item;
-    background-color: $theme-bg-color;
-    color: $theme-ft-color;
-    &:hover { background-color: $theme-bg-darken-color; }
-  }
-
-  .feature_list__items__separator {
-    margin: 0;
-    border-bottom: 5px solid $theme-color;
+    .feature_list__items__list__item--chosen {
+      @include transform(rotate(-2deg));
+    }
+    .feature_list__items__list__item--selected {
+      @extend .feature_list__items__list__item;
+      background-color: $theme-bg-color;
+      color: $theme-ft-color;
+      &:hover { background-color: $theme-bg-darken-color; }
+    }
   }
 }

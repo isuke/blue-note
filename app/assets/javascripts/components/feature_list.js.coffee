@@ -5,32 +5,23 @@ $ ->
     props: ['userId', 'projectId', 'dispatcher', 'channel']
     data: ->
       featureList: []
+      IterationList: []
       query: { status: ['todo', 'doing'] }
-      filterStatus: ['todo', 'doing']
       schema:
         priority: 'int'
         title:    'like'
         point:    'int'
         status:   'eq'
-      status: undefined
+        iteration_number: 'int'
+      action:
+        status: undefined
+        iteration: undefined
     ready: ->
-      new Sortable document.getElementById('feature_list__items--exists_priority'),
-        group:
-          name: 'feature_list__items--exists_priority'
-          put: ['feature_list__items--not_exists_priority']
-        chosenClass: 'feature_list__items__item--chosen'
+      new Sortable document.getElementById('feature_list__items__list'),
+        chosenClass: 'feature_list__items__list__item--chosen'
         animation: 150
         sort: true
-        onAdd: (evt) => @sort(evt, false)
-        onUpdate: (evt) => @sort(evt, false)
-        onRemove: (evt) => @sort(evt, true)
-      new Sortable document.getElementById('feature_list__items--not_exists_priority'),
-        group:
-          name: 'feature_list__items--not_exists_priority'
-          put: ['feature_list__items--exists_priority']
-        chosenClass: 'feature_list__items__item--chosen'
-        animation: 150
-        sort: false
+        onSort: (evt) => @sort(evt)
     computed:
       filteredFeatureList: ->
         @filter @featureList
@@ -38,10 +29,9 @@ $ ->
         _.filter @filteredFeatureList, (feature) -> feature.selected
     watch:
       projectId: -> @load()
-      filterStatus: (val) ->
-        @query.status = val
-      query: (val) ->
-        @filterStatus = val.status
+      filteredFeatureList:
+        handler: (val) -> Vue.nextTick => @setIterations(val)
+        deep: true
     events:
       addOrUpdateFeatures: (data) ->
         $.each data.features, (index, feature) =>
@@ -56,11 +46,20 @@ $ ->
           _.includes data.ids, feature.id.toString()
     methods:
       load: ->
+        @loadFeatureList()
+        @loadIterationList()
+      loadFeatureList: ->
         $.ajax "/api/projects/#{@projectId}/features.json"
           .done (response) =>
             $.each response, (i, feature) =>
               feature.selected = false
             @featureList = response
+          .fail (response) =>
+            console.error response
+      loadIterationList: ->
+        $.ajax "/api/projects/#{@projectId}/iterations.json"
+          .done (response) =>
+            @iterationList = response
           .fail (response) =>
             console.error response
       deleteAll: ->
@@ -80,8 +79,16 @@ $ ->
       updateStatus: ->
         return if @selectedFeatureList.length <= 0
         params = []
-        $.each $.extend(true, {}, @selectedFeatureList), (index, feature) =>
-          params.push _.extend(feature, status: @status)
+        $.each @selectedFeatureList, (index, feature) =>
+          params.push { id: feature.id, status: @action.status }
+        @updateFeatures(params)
+      updateIterations: ->
+        return if @selectedFeatureList.length <= 0
+        params = []
+        $.each @selectedFeatureList, (index, feature) =>
+          params.push { id: feature.id, iteration_id: @action.iteration }
+        @updateFeatures(params)
+      updateFeatures: (params) ->
         $.ajax
           url: "/api/projects/#{@projectId}/features/update_all.json"
           type: 'PATCH'
@@ -110,11 +117,10 @@ $ ->
         @featureList.$set index, feature
       show: (feature) ->
         page "featureShow/#{feature.id}"
-      sort: (evt, remove) ->
+      sort: (evt) ->
         featureId = evt.item.id.match(/feature_(\d+)/)[1]
 
-        insert_at = null
-        insert_at = evt.newIndex+1 unless remove
+        insert_at = evt.newIndex + 1
 
         $.ajax
           url: "/api/features/#{featureId}/update_priority.json"
@@ -128,5 +134,30 @@ $ ->
           @dispatcher.trigger('features.get', { user_id: @userId, project_id: @projectId, ids: response.ids, show_message: false })
         .fail (response) =>
           json = response.responseJSON
-          window.aaa = response
           toastr.error('', json.message, { timeOut: 0 })
+
+      setIterations: (featureList) ->
+        ite = d3.select('.feature_list__items__iteration')
+        ite.selectAll('div').remove()
+
+        pre_feature = null
+        height = 0
+        border_height = 1
+        $.each _.sortBy(featureList, 'priority'), (index, feature) =>
+          pre_feature = feature unless pre_feature?
+          if pre_feature.iteration_number != feature.iteration_number
+            @setIteration(ite, pre_feature, height)
+            height = 0
+            pre_feature = feature
+
+          height += $("#feature_#{feature.id}").height() + border_height
+
+        @setIteration(ite, pre_feature, height)
+      setIteration: (iteration_div, feature, height) ->
+        text = feature.iteration_number ? 'None'
+        iteration_div.append('div')
+          .style('height', "#{height}px")
+          .attr('class', 'feature_list__items__iterations__item')
+          .append('span')
+          .attr('class', 'feature_list__items__iterations__item__number')
+          .text(text)
