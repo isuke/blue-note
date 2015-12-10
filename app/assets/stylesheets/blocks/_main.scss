@@ -1,0 +1,22 @@
+.main {
+  /*** variables **************************************************************/
+  $main-left-bg-color:        $black-bg-lighten-color;
+  /****************************************************************************/
+
+  @include display(flex);
+  @include flex-direction(row);
+  @include align-items(stretch);
+  @include flex(1);
+
+  .main__left {
+    background-color: $main-left-bg-color;
+    @include flex(0 0 $global-left-size);
+    @include order(-1);
+    @include media($tablet) { display: none; }
+  }
+
+  .main__right {
+    @include flex(1);
+    @include order(1);
+  }
+}

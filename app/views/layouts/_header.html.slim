@@ -15,14 +15,14 @@
 
           li.header__list__item.droodown
             span.header__btn.dropdown__btn
-              | Projects
+              = fa_icon 'caret-down', text: 'Projects', right: true
             ul.header__dropdown_list.dropdown__content
               - @current_user.projects.each do |project|
                 li.header__dropdown_list__item = link_to project.name, progress_path(project)
 
           li.header__list__item.droodown
             span.header__btn.dropdown__btn
-              = @current_user.name
+              = fa_icon 'caret-down', text: @current_user.name, right: true
             ul.header__dropdown_list.dropdown__content
               li.header__dropdown_list__item = link_to 'Logout', '#', 'v-on:click': 'logout'
         - else

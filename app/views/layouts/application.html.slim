@@ -7,13 +7,14 @@ html
     = csrf_meta_tags
   body
 
-    == render partial: 'layouts/header'
-
     .outer_container
-      .outer_container__left
-        == yield :sidemenu
+      == render partial: 'layouts/header'
 
-      .outer_container__right
-        == yield
+      = content_tag 'div', id: (@html_id || controller.action_name), class: 'main'
+        .main__left
+          == yield :sidemenu
 
-    == render partial: 'layouts/footer'
+        .main__right
+          == yield
+
+      == render partial: 'layouts/footer'

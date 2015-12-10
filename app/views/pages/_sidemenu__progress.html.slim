@@ -1,0 +1,17 @@
+.sidemenu__progress
+  .sidemenu__list__title
+    = fa_icon 'bar-chart'
+    div Progress
+
+  .sidemenu__progress__feature
+    component [
+      :is             = "sidemenuView"
+      :user-id        = "userId"
+      :project-id     = "projectId"
+      :dispatcher     = "dispatcher"
+      :channel        = "channel"
+      v-ref:sidemenuView
+      keep-alive      = true
+    ]
+    == render 'shared/feature_new'
+    == render 'shared/feature_show'

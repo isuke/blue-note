@@ -5,13 +5,12 @@
 
 - content_for :sidemenu do
   - content_for :sidemenu_progress do
-    | Progress
+    == render partial: 'pages/sidemenu__progress'
   == render partial: 'shared/project_sidemenu', locals: { project: @project }
 
-#progress.progress
+.progress
   = hidden_field_tag :user_id   , @current_user.id, 'v-model': 'userId'
   = hidden_field_tag :project_id, @project.id     , 'v-model': 'projectId'
 
   == render partial: 'pages/progress__division1'
-  == render partial: 'pages/progress__division2'
   == render partial: 'pages/progress__division3'

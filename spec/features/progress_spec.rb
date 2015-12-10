@@ -57,7 +57,7 @@ RSpec.feature 'Progress Page', js: true do
     end
 
     scenario 'filtering list when filter status checked' do
-      find('.feature_list__menu__filter').find('.feature_list__menu__item__btn').click
+      find('.feature_list__menu__filter').find('.feature_list__menu__item__inner--btn').click
       uncheck 'query_status_todo'
       check   'query_status_doing'
       check   'query_status_done'
@@ -80,8 +80,8 @@ RSpec.feature 'Progress Page', js: true do
       wait_for_ajax
       sleep 0.5
 
-      expect(page).to have_button 'Back'
-      expect(page).to have_button 'Edit'
+      expect(find('.feature_show__view')).to have_back_button
+      expect(find('.feature_show__view')).to have_button 'Edit'
     end
 
     scenario 'delete selected feature when click delete button' do
@@ -121,16 +121,16 @@ RSpec.feature 'Progress Page', js: true do
     end
 
     scenario 'show' do
-      expect(find('.feature_show__view__item--title')).to      have_content feature.title
-      expect(find('.feature_show__view__item--point')).to      have_content feature.point
-      expect(find('.feature_show__view__item--status')).to     have_content feature.status
-      expect(find('.feature_show__view__item--updated-at')).to have_content feature.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
-      expect(page).to have_button 'Back'
-      expect(page).to have_button 'Edit'
+      expect(find('.feature_show__item--title')).to      have_content feature.title
+      expect(find('.feature_show__item--point')).to      have_content feature.point
+      expect(find('.feature_show__item--status')).to     have_content feature.status
+      expect(find('.feature_show__item--updated-at')).to have_content feature.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%LZ")
+      expect(find('.feature_show__view')).to have_back_button
+      expect(find('.feature_show__view')).to have_button 'Edit'
     end
 
     scenario 'back to new feature when click back button' do
-      click_button 'Back'
+      find('.feature_show__view').find('.feature_show__btns__btn--back').click
 
       sleep 0.5
 
@@ -154,24 +154,6 @@ RSpec.feature 'Progress Page', js: true do
         sleep 0.5
       end
 
-      scenario 'back to feature show when to cancel button' do
-        find('.feature_show').fill_in :title , with: 'edited title'
-        find('.feature_show').fill_in :point , with: '1'
-        find('.feature_show').select 'Done', from:  :status
-        click_button 'Cancel'
-
-        sleep 0.5
-
-        expect(find('.feature_show__view__item--title')).to      have_content feature.title
-        expect(find('.feature_show__view__item--point')).to      have_content feature.point
-        expect(find('.feature_show__view__item--status')).to     have_content feature.status
-        expect(find('.feature_show__view__item--title')).not_to  have_content 'edited title'
-        expect(find('.feature_show__view__item--point')).not_to  have_content '1'
-        expect(find('.feature_show__view__item--status')).not_to have_content 'done'
-        expect(page).to have_button 'Back'
-        expect(page).to have_button 'Edit'
-      end
-
       scenario 'update the feature when to update button' do
         find('.feature_show').fill_in :title , with: 'edited title'
         find('.feature_show').fill_in :point , with: '1'
@@ -180,14 +162,14 @@ RSpec.feature 'Progress Page', js: true do
 
         sleep 0.5
 
-        expect(find('.feature_show__view__item--title')).to      have_content 'edited title'
-        expect(find('.feature_show__view__item--point')).to      have_content '1'
-        expect(find('.feature_show__view__item--status')).to     have_content 'done'
-        expect(find('.feature_show__view__item--title')).not_to  have_content feature.title
-        expect(find('.feature_show__view__item--point')).not_to  have_content feature.point
-        expect(find('.feature_show__view__item--status')).not_to have_content feature.status
-        expect(page).to have_button 'Back'
-        expect(page).to have_button 'Edit'
+        expect(find('.feature_show__item--title')).to      have_content 'edited title'
+        expect(find('.feature_show__item--point')).to      have_content '1'
+        expect(find('.feature_show__item--status')).to     have_content 'done'
+        expect(find('.feature_show__item--title')).not_to  have_content feature.title
+        expect(find('.feature_show__item--point')).not_to  have_content feature.point
+        expect(find('.feature_show__item--status')).not_to have_content feature.status
+        expect(find('.feature_show__view')).to have_back_button
+        expect(find('.feature_show__view')).to have_button 'Edit'
       end
     end
   end

@@ -20,21 +20,6 @@
     }
   }
 
-  .progress__division2 {
-    @include fill-parent;
-    @include row(table);
-    background-color: $progress-bg-accent-color;
-    .progress__division2__feature_new {
-      @include span-columns(5 of 10);
-      @include pad($small-spacing);
-    }
-    .progress__division2__task_new {
-      @include span-columns(5 of 10);
-      @include pad($small-spacing);
-    }
-  }
-
-
   .progress__division3 {
     @include fill-parent;
     @include row(table);

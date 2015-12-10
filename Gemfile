@@ -15,6 +15,7 @@ gem 'slim'
 gem 'enumerize'
 gem 'bourbon'
 gem 'neat'
+gem 'font-awesome-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
@@ -22,6 +23,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-page'
   gem 'rails-assets-toastr'
   gem 'rails-assets-Sortable'
+  gem 'rails-assets-fixed-sticky'
   gem 'rails-assets-d3'
 end
 

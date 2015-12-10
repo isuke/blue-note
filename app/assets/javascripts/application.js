@@ -5,6 +5,7 @@
 //= require page
 //= require toastr
 //= require Sortable/Sortable
+//= require fixed-sticky
 //= require d3
 //= require websocket_rails/main
 
