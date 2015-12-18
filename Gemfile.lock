@@ -110,6 +110,8 @@ GEM
     ffi-compiler (0.1.3)
       ffi (>= 1.0.0)
       rake
+    font-awesome-rails (4.5.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     hirb (0.7.3)
@@ -179,8 +181,14 @@ GEM
       sprockets-rails
     rails-assets-Sortable (1.4.2)
     rails-assets-d3 (3.5.10)
+    rails-assets-filament-fixed (0.1.2)
+    rails-assets-fixed-sticky (0.1.6)
+      rails-assets-filament-fixed (>= 0.1.1)
+      rails-assets-jquery (>= 1.9.1)
+      rails-assets-qunit (>= 1.12.0)
     rails-assets-jquery (2.1.4)
     rails-assets-page (1.6.3)
+    rails-assets-qunit (1.20.0)
     rails-assets-toastr (2.1.1)
       rails-assets-jquery (>= 1.6.3)
     rails-assets-underscore (1.8.3)
@@ -332,6 +340,7 @@ DEPENDENCIES
   enumerize
   factory_girl_rails
   faker
+  font-awesome-rails
   hirb-unicode
   jbuilder (~> 2.0)
   jquery-rails
@@ -346,6 +355,7 @@ DEPENDENCIES
   rails (= 4.2.2)
   rails-assets-Sortable!
   rails-assets-d3!
+  rails-assets-fixed-sticky!
   rails-assets-page!
   rails-assets-toastr!
   rails-assets-underscore!

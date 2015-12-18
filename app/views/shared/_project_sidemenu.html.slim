@@ -2,14 +2,18 @@
   ul.sidemenu__list
     - if yield(:sidemenu_progress).empty?
       = link_to progress_path(project) do
-        li.sidemenu__list__item Progress
+        li.sidemenu__list__item
+          = fa_icon 'bar-chart'
+          div Progress
     - else
       li.sidemenu__list__item--active
         == yield :sidemenu_progress
 
     - if yield(:sidemenu_settings).empty?
       = link_to project_settings_path(project) do
-        li.sidemenu__list__item Settings
+        li.sidemenu__list__item
+          = fa_icon 'cogs'
+          div Settings
     - else
       li.sidemenu__list__item--active
         == yield :sidemenu_settings

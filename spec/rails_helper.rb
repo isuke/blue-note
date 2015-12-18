@@ -17,7 +17,7 @@ ActiveRecord::Migration.maintain_test_schema!
 
 Capybara.javascript_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+  Capybara::Poltergeist::Driver.new(app, js_errors: false, window_size: [1025, 768])
 end
 
 SimpleCov.start 'rails'

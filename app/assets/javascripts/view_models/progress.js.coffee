@@ -6,7 +6,7 @@ $ ->
       projectId: undefined
       dispatcher: undefined
       channel: undefined
-      division2View: 'featureNew'
+      sidemenuView: 'featureNew'
       division3View: 'featureList'
     compiled: ->
       @dispatcher = new WebSocketRails('localhost:3000/websocket')
@@ -17,12 +17,14 @@ $ ->
 
       @channel.bind 'features.deleted', (data) =>
         @.$broadcast('removeFeature', data)
+    ready: ->
+      $('.sidemenu').fixedsticky();
 
   page hashbang: true, dispatch: false
   page 'featureNew', (ctx) ->
-    progress.division2View = 'featureNew'
+    progress.sidemenuView = 'featureNew'
   page 'featureShow/:id', (ctx) ->
-    progress.division2View = 'featureShow'
+    progress.sidemenuView = 'featureShow'
     Vue.nextTick =>
-      progress.$refs.division2view.editMode = false
-      progress.$refs.division2view.featureId = ctx.params.id
+      progress.$refs.sidemenuview.editMode = false
+      progress.$refs.sidemenuview.featureId = ctx.params.id

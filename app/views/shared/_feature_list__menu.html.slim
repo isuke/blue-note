@@ -1,8 +1,9 @@
 .feature_list__menu
   ul.feature_list__menu__filter
-    li.feature_list__menu__item = label_tag 'Filter', nil, class: 'feature_list__menu__item__lbl'
+    li.feature_list__menu__item = label_tag 'Filter', nil, class: 'feature_list__menu__item__inner--lbl'
     li.feature_list__menu__item.droodown
-      = button_tag 'status', class: 'feature_list__menu__item__btn dropdown__btn'
+      = button_tag 'status', class: 'feature_list__menu__item__inner--btn dropdown__btn' do
+        = fa_icon 'caret-down', text: 'status', right: true
       ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
         - Feature.status.values.each do |status|
           li.feature_list__menu__dropdown_list__item
@@ -10,15 +11,18 @@
             = label_tag "query_status_#{status}", status
 
   ul.feature_list__menu__action
-    li.feature_list__menu__item = label_tag 'Action', nil, class: 'feature_list__menu__item__lbl'
+    li.feature_list__menu__item = label_tag 'Action', nil, class: 'feature_list__menu__item__inner--lbl'
     li.feature_list__menu__item
-      = button_tag 'refresh', class: 'feature_list__menu__item__btn', 'v-on:click': 'load()'
+      = button_tag class: 'feature_list__menu__item__inner--btn', 'v-on:click': 'load()' do
+        = fa_icon 'refresh'
 
     li.feature_list__menu__item v-if="selectedFeatureList.length > 0"
-      = button_tag 'delete', class: 'feature_list__menu__item__btn', 'v-on:click': 'deleteAll()'
+      = button_tag class: 'feature_list__menu__item__inner--btn', 'v-on:click': 'deleteAll()' do
+        = fa_icon 'trash'
 
     li.feature_list__menu__item.droodown v-if="selectedFeatureList.length > 0"
-      = button_tag 'status', class: 'feature_list__menu__item__btn dropdown__btn'
+      = button_tag class: 'feature_list__menu__item__inner--btn dropdown__btn' do
+        = fa_icon 'caret-down', text: 'status', right: true
       ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
         - Feature.status.values.each do |status|
           li.feature_list__menu__dropdown_list__item
@@ -27,7 +31,8 @@
         = button_tag 'update', 'v-on:click': 'updateStatus()'
 
     li.feature_list__menu__item.droodown v-if="selectedFeatureList.length > 0"
-      = button_tag 'iteration', class: 'feature_list__menu__item__btn dropdown__btn'
+      = button_tag class: 'feature_list__menu__item__inner--btn dropdown__btn' do
+        = fa_icon 'caret-down', text: 'iteration', right: true
       ul.feature_list__menu__dropdown_list.dropdown__content style='display:none'
         li.feature_list__menu__dropdown_list__item
           input type="radio" name="action_iteration" id="action_iteration_none" value="" v-model="action.iteration"

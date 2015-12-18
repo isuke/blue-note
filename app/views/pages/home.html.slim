@@ -1,6 +1,6 @@
 = javascript_include_tag 'view_models/home'
 
-#home.home
+.home
   h1.home__title Blue Note
   p is agile project management tool...
   - unless logged_in?
@@ -8,7 +8,7 @@
 
   component [
     is = "signUpModal"
-    v-ref:signUpModa
+    v-ref:sign-up-modal
     keep-alive = true
   ]
 

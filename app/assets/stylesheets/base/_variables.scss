@@ -18,7 +18,7 @@ $heading-font-family: $base-font-family;
  * 1.1^-5 = 0.62
  * 1.1^-6 = 0.56    extra-small
  */
-$base-font-size: 1rem;
+$base-font-size: 1.04rem;
 $extra-large-font-size: $base-font-size * 1.77;
 $large-font-size:       $base-font-size * 1.33;
 $small-font-size:       $base-font-size * 0.75;
@@ -34,6 +34,7 @@ $base-spacing: $base-line-height * 1em;
 $large-spacing: $base-spacing * 3;
 $small-spacing: $base-spacing / 3;
 $base-z-index: 0;
+$global-left-size: 250px;
 
 // Colors
 //// Common

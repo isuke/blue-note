@@ -7,10 +7,10 @@
   $header-ft-non-accent-color: $theme-ft-non-accent-color;
   /****************************************************************************/
 
-  @include fill-parent;
-  @include row;
-  position: relative;
-  min-height: $header-height;
+  @include display(flex);
+  @include flex-direction(row);
+  @include align-items(stretch);
+  height: $header-height;
 
   background-color: $header-bg-color;
 
@@ -22,7 +22,7 @@
   }
 
   .header__left {
-    @include span-columns(2 of 12);
+    width: $global-left-size;
     @include centering(both);
 
     background-color: $header-bg-accent-color;
@@ -30,14 +30,14 @@
   }
 
   .header__center {
-    @include span-columns(6 of 12);
+    @include flex(2);
     @include padding(null $small-spacing null $small-spacing);
     @include centering(vertical);
     @include media($tablet) { @include span-columns(7 of 10); }
   }
 
   .header__right {
-    @include span-columns(4 of 12);
+    @include flex(1);
     @include centering(vertical);
     @include media($tablet) { @include span-columns(3 of 10); }
     > * { float: right; }

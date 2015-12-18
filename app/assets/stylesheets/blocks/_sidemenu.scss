@@ -4,27 +4,32 @@
   $sidemenu-bg-color:        $black-bg-lighten-color;
   $sidemenu-bg-active-color: $black-bg-color;
   $sidemenu-ft-color:        $black-ft-lighten-color;
-  $sidemenu-ft-active-color: $black-ft-color;
+  $sidemenu-ft-active-color: $black-ft-accent-color;
   $sidemenu-ft-accent-color: $black-ft-accent-color;
   /****************************************************************************/
 
-  padding-bottom: 32768px;
-  margin-bottom: -32768px;
+  top: 0;
+  width: $global-left-size;
   background-color: $sidemenu-bg-color;
   color: $sidemenu-ft-accent-color;
 
-  .sidemenu__list__item {
-    @include pad($base-spacing);
-    @include centering(horizontal);
-    cursor: pointer;
-    @include transition(all .2s ease-out);
+  .sidemenu__list {
+    .sidemenu__list__title {
+      margin-bottom: $base-spacing;
+    }
+    .sidemenu__list__item {
+      @include pad($base-spacing);
+      @include centering(horizontal);
+      cursor: pointer;
+      @include transition(all .2s ease-out);
 
-    &:hover { background-color: $sidemenu-bg-active-color; }
-  }
-  .sidemenu__list__item--active {
-    @extend .sidemenu__list__item;
-    background-color: $sidemenu-bg-active-color;
-    color: $sidemenu-ft-active-color;
-    cursor: default;
+      &:hover { background-color: $sidemenu-bg-active-color; }
+    }
+    .sidemenu__list__item--active {
+      @extend .sidemenu__list__item;
+      background-color: $sidemenu-bg-active-color;
+      color: $sidemenu-ft-active-color;
+      cursor: default;
+    }
   }
 }

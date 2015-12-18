@@ -9,7 +9,7 @@ html
 
     == render partial: 'layouts/header'
 
-    .outer_container
+    = content_tag 'div', id: (@html_id || controller.action_name), class: 'outer_container'
       == yield
 
     == render partial: 'layouts/footer'

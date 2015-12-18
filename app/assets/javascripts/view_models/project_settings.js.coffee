@@ -5,5 +5,3 @@ $ ->
       userId: undefined
       projectId: undefined
       role: undefined
-      division2View: 'featureNew'
-      division3View: 'featureList'

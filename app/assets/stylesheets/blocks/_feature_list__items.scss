@@ -1,12 +1,9 @@
 .feature_list .feature_list__items {
   /*** variables **************************************************************/
   $feature_list__items_min_height: 150px;
-  $feature_list__items_max_height: 400px;
   /****************************************************************************/
 
   min-height: $feature_list__items_min_height;
-  max-height: $feature_list__items_max_height;
-  overflow: scroll;
   @include row;
 
   .feature_list__items__iteration {
