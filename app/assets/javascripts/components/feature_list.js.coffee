@@ -6,12 +6,12 @@ $ ->
     data: ->
       featureList: []
       IterationList: []
-      query: { status: ['todo', 'doing'] }
+      query: {status: ['todo', 'doing']}
       schema:
         priority: 'int'
-        title:    'like'
-        point:    'int'
-        status:   'eq'
+        title: 'like'
+        point: 'int'
+        status: 'eq'
         iteration_number: 'int'
       action:
         status: undefined
@@ -41,7 +41,7 @@ $ ->
             @addFeature data.user, feature, data.show_message
       removeFeature: (data, show_message = true) ->
         if show_message && data.user.id.toString() != @userId
-          toastr.info('', "#{data.user.name}: deleted feature", { timeOut: 0 })
+          toastr.info('', "#{data.user.name}: deleted feature", {timeOut: 0})
         @featureList = _.reject @featureList, (feature) ->
           _.includes data.ids, feature.id.toString()
     methods:
@@ -72,21 +72,21 @@ $ ->
               ids: _.pluck @selectedFeatureList, 'id'
           .done (response) =>
             toastr.success('', response.message)
-            @dispatcher.trigger('features.delete', { user_id: @userId, project_id: @projectId, ids: response.ids, show_message: true })
+            @dispatcher.trigger('features.delete', {user_id: @userId, project_id: @projectId, ids: response.ids, show_message: true})
           .fail (response) =>
             json = response.responseJSON
-            toastr.error('', json.message, { timeOut: 0 })
+            toastr.error('', json.message, {timeOut: 0})
       updateStatus: ->
         return if @selectedFeatureList.length <= 0
         params = []
         $.each @selectedFeatureList, (index, feature) =>
-          params.push { id: feature.id, status: @action.status }
+          params.push {id: feature.id, status: @action.status}
         @updateFeatures(params)
       updateIterations: ->
         return if @selectedFeatureList.length <= 0
         params = []
         $.each @selectedFeatureList, (index, feature) =>
-          params.push { id: feature.id, iteration_id: @action.iteration }
+          params.push {id: feature.id, iteration_id: @action.iteration}
         @updateFeatures(params)
       updateFeatures: (params) ->
         $.ajax
@@ -101,16 +101,16 @@ $ ->
           @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, ids: response.ids})
         .fail (response) =>
           json = response.responseJSON
-          toastr.error('', json.message, { timeOut: 0 })
+          toastr.error('', json.message, {timeOut: 0})
       addFeature: (user, feature, show_message = true) ->
         if show_message && user.id.toString() != @userId
-          toastr.info('', "#{user.name}: created #{feature.title}", { timeOut: 0 })
+          toastr.info('', "#{user.name}: created #{feature.title}", {timeOut: 0})
         newFeature = feature
         newFeature.selected = false
         @featureList.push(newFeature)
       updateFeature: (user, feature, show_message = true) ->
         if show_message && user.id.toString() != @userId
-          toastr.info('', "#{user.name}: updated #{feature.title}", { timeOut: 0 })
+          toastr.info('', "#{user.name}: updated #{feature.title}", {timeOut: 0})
         index = _.findIndex @featureList, {id: feature.id}
         updateFeature = feature
         updateFeature.selected = @featureList[index].selected
@@ -131,10 +131,10 @@ $ ->
             JSON.stringify(insert_at: insert_at)
         .done (response) =>
           toastr.success('', response.message)
-          @dispatcher.trigger('features.get', { user_id: @userId, project_id: @projectId, ids: response.ids, show_message: false })
+          @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, ids: response.ids, show_message: false})
         .fail (response) =>
           json = response.responseJSON
-          toastr.error('', json.message, { timeOut: 0 })
+          toastr.error('', json.message, {timeOut: 0})
 
       setIterations: (featureList) ->
         ite = d3.select('.feature_list__items__iteration')

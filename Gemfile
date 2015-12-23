@@ -40,6 +40,7 @@ group :development do
   gem 'bullet'
   gem 'rubocop'  , require: false
   gem 'slim_lint', require: false
+  gem 'coffeelint'
   gem 'bitters'
 end
 

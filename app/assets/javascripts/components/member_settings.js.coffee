@@ -5,7 +5,7 @@ $ ->
     data: ->
       member:
         email: ''
-        role:  'general'
+        role: 'general'
       memberList: []
     watch:
       projectId: -> @load()
@@ -17,23 +17,23 @@ $ ->
           .fail (response) =>
             console.error response
       submit: (e) ->
-          e.preventDefault()
-          submit = $('.members_settings__member_new__submit')
-          submit.prop('disabled', true)
-          $.ajax
-            url: "/api/projects/#{@projectId}/members.json"
-            type: 'POST'
-            timeout: 10000
-            data:
-              member:
-                email: @member.email
-                role: @member.role
-          .done (response) =>
-            toastr.success('', response.message)
-            @member.email = ''
-            @load()
-          .fail (response) =>
-            json = response.responseJSON
-            toastr.error(json.full_messages, json.message, { timeOut: 0 })
-          .always () =>
-            submit.prop('disabled', false)
+        e.preventDefault()
+        submit = $('.members_settings__member_new__submit')
+        submit.prop('disabled', true)
+        $.ajax
+          url: "/api/projects/#{@projectId}/members.json"
+          type: 'POST'
+          timeout: 10000
+          data:
+            member:
+              email: @member.email
+              role: @member.role
+        .done (response) =>
+          toastr.success('', response.message)
+          @member.email = ''
+          @load()
+        .fail (response) =>
+          json = response.responseJSON
+          toastr.error(json.full_messages, json.message, {timeOut: 0})
+        .always =>
+          submit.prop('disabled', false)

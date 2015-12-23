@@ -1,7 +1,7 @@
 Vue.filter 'paginate', (list) ->
   s = parseInt(@$get('pageStart'), 10)
   e = parseInt(@$get('pageEnd')  , 10)
-  return list.slice(s, e+1)
+  return list.slice(s, e + 1)
 
 Vue.modules.paginationable = {
   data: ->
@@ -10,8 +10,8 @@ Vue.modules.paginationable = {
   computed:
     listLength: -> 0 # please override
     pageTotal:  -> Math.ceil(@listLength / @pageSize)
-    pageStart:  -> (@currentPage-1)*@pageSize
-    pageEnd:    -> (@currentPage*@pageSize)-1
+    pageStart:  -> (@currentPage - 1) * @pageSize
+    pageEnd:    -> (@currentPage * @pageSize) - 1
   methods:
     setCurrentPage: (val) ->
       @currentPage = val if 0 < val and val <= @pageTotal
