@@ -1,7 +1,7 @@
 ruby:
   config_file: .rubocop.yml
 coffeescript:
-  enabled: false
+  confog_file: .coffeelint.json
 javascript:
   enabled: false
 scss:

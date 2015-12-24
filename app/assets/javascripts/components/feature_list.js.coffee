@@ -152,7 +152,7 @@ $ ->
 
           height += $("#feature_#{feature.id}").height() + border_height
 
-        @setIteration(ite, pre_feature, height)
+        @setIteration(ite, pre_feature, height) if pre_feature?
       setIteration: (iteration_div, feature, height) ->
         text = feature.iteration_number ? 'None'
         iteration_div.append('div')

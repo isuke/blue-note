@@ -19,6 +19,13 @@ RSpec.describe 'features request' do
       expect(response).to be_success
       expect(response.status).to eq 200
       expect(json.count).to eq 2
+
+      expect(json[0]['id']).to               eq feature1.id
+      expect(json[0]['title']).to            eq feature1.title
+      expect(json[0]['status']).to           eq feature1.status
+      expect(json[0]['priority']).to         eq feature1.priority
+      expect(json[0]['point']).to            eq feature1.point
+      expect(json[0]['iteration_number']).to eq feature1.iteration.number
     end
   end
 
