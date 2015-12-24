@@ -1,6 +1,6 @@
 class Api::ProjectsController < Api::ApiController
   def index
-    @projects = current_user.projects
+    @projects = current_user.projects.order(:id)
     render json: @projects, status: :ok
   end
 

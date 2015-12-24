@@ -7,9 +7,9 @@ class Api::FeaturesController < Api::ApiController
   before_action -> { member_authorize @project }, only: [:index, :create, :update_all, :destroy_all]
 
   def index
-    @features = @project.features.includes(:iteration)
+    @features = @project.features.includes(:iteration).order(:id)
 
-    render 'jsons/features', formats: :json, handlers: :jbuilder
+    render 'jsons/features', formats: :json
   end
 
   def show

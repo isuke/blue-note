@@ -19,6 +19,9 @@ RSpec.describe 'iterations request' do
       expect(response).to be_success
       expect(response.status).to eq 200
       expect(json.count).to eq 2
+
+      expect(json[0]['id']).to     eq iteration1.id
+      expect(json[0]['number']).to eq iteration1.number
     end
   end
 end

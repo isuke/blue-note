@@ -5,7 +5,7 @@ class Api::IterationsController < Api::ApiController
   before_action -> { member_authorize @project }, only: [:index]
 
   def index
-    @iterations = @project.iterations
+    @iterations = @project.iterations.order(:id)
     render json: @iterations, status: :ok
   end
 

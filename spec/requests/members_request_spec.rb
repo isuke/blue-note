@@ -18,6 +18,13 @@ RSpec.describe 'members request' do
       expect(response).to be_success
       expect(response.status).to eq 200
       expect(json.count).to eq 3
+
+      member = user.members.first
+      expect(json[0]['id']).to         eq member.id
+      expect(json[0]['user_name']).to  eq member.user.name
+      expect(json[0]['user_email']).to eq member.user.email
+      expect(json[0]['role']).to       eq member.role
+      expect(json[0]['role_value']).to eq member.role.value
     end
   end
 

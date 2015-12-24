@@ -6,8 +6,8 @@ class Api::MembersController < Api::ApiController
   before_action -> { member_authorize @project, only: [:admin] }, only: [:create]
 
   def index
-    @members = @project.members.includes(:user)
-    render 'jsons/members', formats: :json, handlers: :jbuilder
+    @members = @project.members.includes(:user).order(:id)
+    render 'jsons/members', formats: :json
   end
 
   def create
