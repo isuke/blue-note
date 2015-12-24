@@ -10,7 +10,7 @@ $ ->
       @load()
     methods:
       load: ->
-        $.ajax "/api/projects.json"
+        $.ajax '/api/projects.json'
           .done (response) =>
             @projectList = response
           .fail (response) =>
@@ -34,6 +34,6 @@ $ ->
           @load()
         .fail (response) =>
           json = response.responseJSON
-          toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })
-        .always () =>
+          toastr.error(json.errors.full_messages.join('<br>'), json.message, {timeOut: 0})
+        .always =>
           submit.prop('disabled', false)

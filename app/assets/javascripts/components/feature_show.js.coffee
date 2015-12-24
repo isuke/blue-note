@@ -4,7 +4,7 @@ $ ->
     props: ['userId', 'projectId', 'dispatcher', 'channel']
     data: ->
       featureId: undefined
-      feature: { title: "", point: "", status: "", updated_at: "" }
+      feature: {title: '', point: '', status: '', updated_at: ''}
       featureEdit: undefined
       editMode: false
     watch:
@@ -16,7 +16,7 @@ $ ->
       back: (e) ->
         e.preventDefault()
         page 'featureNew'
-      submit: (e)->
+      submit: (e) ->
         try
           e.preventDefault()
           submit = $('#feature_show_submit')
@@ -26,17 +26,17 @@ $ ->
             type: 'PATCH'
             data:
               feature:
-                title:  @featureEdit.title
-                point:  @featureEdit.point
+                title: @featureEdit.title
+                point: @featureEdit.point
                 status: @featureEdit.status
           .done (response) =>
             toastr.success('', response.message)
             @getFeature(response.id)
             @editMode = false
-            @dispatcher.trigger('features.get', { user_id: @userId, project_id: @projectId, ids: [response.id], show_message: true })
+            @dispatcher.trigger('features.get', {user_id: @userId, project_id: @projectId, ids: [response.id], show_message: true})
           .fail (response) =>
             json = response.responseJSON
-            toastr.error(json.errors.full_messages.join('<br>'), json.message, { timeOut: 0 })
+            toastr.error(json.errors.full_messages.join('<br>'), json.message, {timeOut: 0})
         finally
           submit.prop('disabled', false)
       getFeature: (featureId) ->
@@ -46,4 +46,3 @@ $ ->
             @featureEdit = $.extend(true, {}, @feature)
           .fail (response) =>
             console.error response
-

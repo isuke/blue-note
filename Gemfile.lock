@@ -83,6 +83,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    coffeelint (1.14.0)
+      coffee-script
+      execjs
+      json
     columnize (0.9.0)
     daemons (1.2.3)
     database_rewinder (0.5.2)
@@ -336,6 +340,7 @@ DEPENDENCIES
   bullet
   capybara
   coffee-rails (~> 4.1.0)
+  coffeelint
   database_rewinder
   enumerize
   factory_girl_rails

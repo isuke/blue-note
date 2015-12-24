@@ -7,12 +7,12 @@ $ ->
         email: ''
         password: ''
     methods:
-      submit: (e)->
+      submit: (e) ->
         e.preventDefault()
         submit = $('#login_modal_submit')
         submit.prop('disabled', true)
         $.ajax
-          url: "/api/login.json"
+          url: '/api/login.json'
           type: 'POST'
           timeout: 10000
           data:
@@ -20,10 +20,10 @@ $ ->
               email: @user_session.email
               password: @user_session.password
         .done (response) =>
-          toastr.success('', response.message, { timeOut: 0 })
+          toastr.success('', response.message, {timeOut: 0})
           document.location = '/dashboard'
         .fail (response) =>
           json = response.responseJSON
-          toastr.error('', json.message, { timeOut: 0 })
-        .always () =>
+          toastr.error('', json.message, {timeOut: 0})
+        .always =>
           submit.prop('disabled', false)

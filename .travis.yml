@@ -20,6 +20,7 @@ script:
   - bundle exec rspec spec --order rand
   - bundle exec rubocop --format simple
   - bundle exec slim-lint app/views/
+  - bundle exec rake coffeelint
 env:
   global:
     - RAILS_ENV=test

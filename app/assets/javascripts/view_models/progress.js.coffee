@@ -18,7 +18,7 @@ $ ->
       @channel.bind 'features.deleted', (data) =>
         @.$broadcast('removeFeature', data)
     ready: ->
-      $('.sidemenu').fixedsticky();
+      $('.sidemenu').fixedsticky()
 
   page hashbang: true, dispatch: false
   page 'featureNew', (ctx) ->
