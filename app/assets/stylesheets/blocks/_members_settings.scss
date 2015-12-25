@@ -4,22 +4,27 @@
   /****************************************************************************/
 
   .members_settings__member_list {
-    .members_settings__member_list__item {
+    .members_settings__member_list__row {
       @include row;
-      padding: $small-spacing;
       border-bottom: $base-border;
       @include transition(all .2s ease-out);
 
       &:hover { background-color: $white-bg-darken-color; }
       &:nth-child(1) { border-top: $base-border; }
 
-      .members_settings__member_list__item--user_role {
+      .members_settings__member_list__row__item {
+        padding: $small-spacing;
+      }
+      .members_settings__member_list__row__item--user_role {
+        @extend .members_settings__member_list__row__item;
         @include span-columns(2 of 16);
       }
-      .members_settings__member_list__item--user_name {
+      .members_settings__member_list__row__item--user_name {
+        @extend .members_settings__member_list__row__item;
         @include span-columns(7 of 16);
       }
-      .members_settings__member_list__item--user_email {
+      .members_settings__member_list__row__item--user_email {
+        @extend .members_settings__member_list__row__item;
         @include span-columns(7 of 16);
       }
     }

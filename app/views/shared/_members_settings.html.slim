@@ -5,12 +5,12 @@ script type='text/x-template' id='members_settings'
         li [
           v-for    = "member in memberList | orderBy 'role_value'"
           id       = "member_{{member.id}}"
-          class    = "members_settings__member_list__item"
+          class    = "members_settings__member_list__row"
           track-by = "id"
         ]
-          .members_settings__member_list__item--user_role  v-text="member.role"
-          .members_settings__member_list__item--user_name  v-text="member.user_name"
-          .members_settings__member_list__item--user_email v-text="member.user_email"
+          .members_settings__member_list__row__item--user_role  v-text="member.role"
+          .members_settings__member_list__row__item--user_name  v-text="member.user_name"
+          .members_settings__member_list__row__item--user_email v-text="member.user_email"
 
     .members_settings__member_new v-if="role == 'admin'"
       = form_tag api_project_members_path do

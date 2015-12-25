@@ -10,10 +10,10 @@
 #
 
 class Project < ActiveRecord::Base
-  has_many :members
+  has_many :members, dependent: :destroy
   has_many :users, through: :members
-  has_many :features  , -> { order(priority: :asc) }
-  has_many :iterations, -> { order(number: :asc) }
+  has_many :features  , -> { order(priority: :asc) }, dependent: :destroy
+  has_many :iterations, -> { order(number: :asc)   }, dependent: :destroy
 
   validates :name, presence: true
 

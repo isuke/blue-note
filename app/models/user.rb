@@ -24,7 +24,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic
 
-  has_many :members
+  has_many :members, dependent: :destroy
   has_many :projects, through: :members
 
   validates :name, presence: true, length: { maximum: 50 }
