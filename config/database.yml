@@ -13,3 +13,9 @@ development:
 test:
   <<: *default
   database: blue_note_test
+
+production:
+  <<: *default
+  database: blue_note
+  username: <%= ENV['RAILS_DATABASE_USER'] %>
+  password: <%= ENV['RAILS_DATABASE_PASSWORD'] %>

@@ -58,3 +58,8 @@ group :development, :test do
   gem 'teaspoon-jasmine'
   gem 'simplecov', require: false
 end
+
+group :production do
+  gem 'thin'
+  gem 'rails_12factor'
+end

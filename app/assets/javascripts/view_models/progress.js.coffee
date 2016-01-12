@@ -9,7 +9,7 @@ $ ->
       sidemenuView: 'featureNew'
       division3View: 'featureList'
     compiled: ->
-      @dispatcher = new WebSocketRails('localhost:3000/websocket')
+      @dispatcher = new WebSocketRails("#{window.location.host}/websocket")
       @channel = @dispatcher.subscribe("project_#{@projectId}")
 
       @channel.bind 'features.got', (data) =>
